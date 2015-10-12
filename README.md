@@ -1,9 +1,8 @@
-﻿# MATLAB Fall 2015 – Research Plan (Template)
-(text between brackets to be removed)
+﻿# MATLAB Fall 2015 – Research Plan
 
-> * Group Name: (be creative!)
-> * Group participants names: (alphabetically sorted by last name)
-> * Project Title: (can be changed later)
+> * Group Name: Road Blockers
+> * Group participants names: Carlo Del Dom, Pol Welter
+> * Project Title: Traffic Flow Simulation: Red Lights
 
 ## General Introduction
 
@@ -37,8 +36,3 @@
 ## Research Methods
 
 (Cellular Automata, Agent-Based Model, Continuous Modeling...) (If you are not sure here: 1. Consult your colleagues, 2. ask the teachers, 3. remember that you can change it afterwards)
-
-
-## Other
-
-(mention datasets you are going to use)
