@@ -29,31 +29,36 @@ We will expand the IDM to include time dependent obstacles, such as traffic ligh
 
 
 ## Fundamental Questions
+#### 1. Can we reproduce the transition to stop and go waves in congested traffic?
+The first step of our project will consist in reproducing the results obtained in [1]. In particular, we will verify the existence of a phase transition from smooth, homogeneous flow at low vehicle densities to congested stop-and-go traffic at high densities. This implementation will yield us a foundation upon which we can build our extensions.
 
- - can we reproduce the results from [x]?
- - Can traffic still be made unstable for low speeds (~50 km/h)?
-    - phase diagram?
- - do maximum acceleration or breaking affect the traffic flow?
-    - wavelength stop-and-go wave?
- - What are the effects of the traffic light at various frequencies?
-    - which intervals allow good flow?
-    - do we observe some kind of resonance?
-    
+#### 2. Can this behaviour still be observed at low speeds/accelerations?
+As we plan to study the effects of a traffic light, which is typically not found on highways, but on roads with lower speed limits, we will investigate the effects of desired target speed on the stability of the flow. We will possibly try to draw a phase diagram presenting desired speed vs density. Phases that are to be expected include
+
+1. smooth flow, 
+2. stop-and-go or jam,
+3. crash.
+
+Apart from speed limit, the accceleration/breaking behaviour is likely to influence the stability. We will also investigate these effects.
+
+Particular attention will be paid to the evolution of the wavelength of occuring stop-and-go waves.
+
+#### 3. How does a traffic light influence the flow? What is the importance of the duration of green light periods?
+The traffic light will impose stop-and-go waves of a certain frequency on the vehicles. We will try to understand if and how these interact with the traffic's natural tendency to form waves of a certain wavelength.
+Lastly we will study the effective throughput a variious switching frequencies of the light (at e.g. fixed duty-cycle). Which switching interval yields best vehicle troughput?
 
 
 ## Expected Results
+For the first part, we expect to reproduce the results from [1].
 
-excpect to reproduce XXXXXXXXX
-Instability at low speeds requires investigation. Will likely happen at some parameters, not sure whether those are realistic though.
-Traffic light: High frequencies will drop troughput (lot of overhaed from acceleration). At this point we do not believe in resonance. Again, a phase transition might occur.
+Wether the traffic can be rendered unstable over a wide range of velocities remains to be seen. We are confident that a corresponding change in maximum acceleration should yield this behaviour. We are not sure whether the resulting parameters required for instability at low speeds are realistic though.
+
+Finally the traffic light, we expect that high switching frequencies result in lower troughput, due to the overhead during acceleration and breaking. Possibly the optimal solution is trivial: have the period equal the simulation length, such that half of the vehicles can quickly pass, while the second half is just stuck until the simulation ends.
+
+At this point in time we estimate that any resonance behaviour is unlikely. However, we might still see a phase transition in wavelength (from natural stop-and-go to traffic light dominated).
 
 
 ## References 
  * [1] Treiber, Martin, and Dirk Helbing. "Explanation of observed features of self-organization in traffic flow." *arXiv preprint cond-mat/9901239* (1999)
  * [2] Treiber, Martin, Arne Kesting, and Dirk Helbing. "Delays, inaccuracies and anticipation in microscopic traffic models." *Physica A: Statistical Mechanics and its Applications 360.1* (2006): 71-88.
  * [3] Gora, Paweł. "Traffic simulation framework." *Computer Modelling and Simulation (UKSim), 2012 UKSim 14th International Conference on*. IEEE, 2012.
-
-## Research Methods
-
-(Cellular Automata, Agent-Based Model, Continuous Modeling...) (If you are not sure here: 1. Consult your colleagues, 2. ask the teachers, 3. remember that you can change it afterwards)
-
