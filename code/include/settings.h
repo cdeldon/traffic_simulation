@@ -9,6 +9,9 @@
 
 struct Settings
 {
+    unsigned int n_cars;
+    float meters;
+
     float v_desired;
     float d_desired;
     float a_max;
@@ -24,12 +27,12 @@ struct Settings
 
     Settings();
 
-    Settings( const float v, const float dist, const float a, const float dec, const float s, const float t );
+    Settings( const unsigned int n, const float m, const float v, const float dist, const float a, const float dec,
+              const float s, const float t );
 
     std::string toString() const;
 
-    void readSettings( char **argv );
-    void readSettings( char *argv);
+    void readSettings( char *argv );
 };
 
 
