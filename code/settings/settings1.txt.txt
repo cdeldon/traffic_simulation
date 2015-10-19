@@ -1,0 +1,8 @@
+N_CARS = 50
+METERS = 1000
+VMAX = 50
+DIST = 5
+AMAX = 1
+DMAX = 2
+SIZE = 2.5
+DT = 1
