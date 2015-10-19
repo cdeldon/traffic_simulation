@@ -2,3 +2,8 @@
 misc.xml
 workspace.xml
 tasks.xml
+codeStyleSettings.xml
+misc.xml
+modules.xml
+vcs.xml
+local.iml
