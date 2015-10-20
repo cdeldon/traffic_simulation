@@ -44,3 +44,9 @@ Thumbs.db
 *[bB]uild*
 *[dD]ebug*
 
+
+# CLION #
+#########
+./code/.idea/.name
+
+
