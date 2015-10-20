@@ -16,8 +16,8 @@ Settings::Settings()
 {
 }
 
-Settings::Settings( const unsigned int n, const float m, const float v, const float dist, const float a,
-                    const float dec, const float s, const float t )
+Settings::Settings( const unsigned int n, const double m, const double v, const double dist, const double a,
+                    const double dec, const double s, const double t )
         : n_cars(n),
           meters(m),
           v_desired(to_ms(v)),

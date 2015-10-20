@@ -8,6 +8,8 @@
 #include <settings.h>
 #include <hack.h>
 
+#define INF (2<<30)
+
 extern Settings settings;
 
 

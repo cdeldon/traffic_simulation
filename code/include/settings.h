@@ -10,15 +10,15 @@
 struct Settings
 {
     unsigned int n_cars;
-    float meters;
+    double meters;
 
-    float v_desired;
-    float d_desired;
-    float a_max;
-    float d_max;
-    float car_size;
+    double v_desired;
+    double d_desired;
+    double a_max;
+    double d_max;
+    double car_size;
 
-    float DT;
+    double DT;
 
     /**
      * Default settings
@@ -27,8 +27,8 @@ struct Settings
 
     Settings();
 
-    Settings( const unsigned int n, const float m, const float v, const float dist, const float a, const float dec,
-              const float s, const float t );
+    Settings( const unsigned int n, const double m, const double v, const double dist, const double a, const double dec,
+              const double s, const double t );
 
     std::string toString() const;
 

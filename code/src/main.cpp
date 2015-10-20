@@ -26,7 +26,7 @@ int main( int argc, char **argv )
 
     std::cout << settings.toString();
 
-    std::vector<float> pos(10, 0.4f);
+    std::vector<double> pos(10, 0.4f);
     Road road(pos);
 
     road.write(( outDir + "Car_position.dat" ).c_str());

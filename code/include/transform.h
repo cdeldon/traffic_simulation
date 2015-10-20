@@ -8,7 +8,7 @@
 template <typename T>
 inline T to_ms(T kmh)
 {
-    return (T)((float)kmh)/3.6;
+    return (T)((double)kmh)/3.6;
 }
 
 template <typename T>

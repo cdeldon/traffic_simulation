@@ -4,23 +4,19 @@
 #include <car.h>
 #include <common.h>
 
-const Car::velocity Car::V_DESIRED = settings.v_desired;
-const Car::position Car::DIST_DESIRED = settings.d_desired;
-const Car::acceleration Car::A_MAX = settings.a_max;
-const Car::acceleration Car::D_MAX = settings.d_desired;
-const Car::length Car::LENGTH = settings.car_size;
 
-Car::Car( const float pos, const unsigned int i )
-        : idx(i),
-          p(pos)
+Car::Car(const position pos)
+    : p(pos), v(0)
+{
+}
+
+Car::Car(const double pos, const velocity vel)
+    : p(pos), v(vel)
 {
 }
 
 Car::Car( const Car &other )
-        : idx(other.idx),
-          p(other.p),
-          prevCar(other.prevCar),
-          nextCar(other.nextCar)
+    : p(other.p), v(other.v), nextCar(other.nextCar), prevCar(other.prevCar)
 {
 }
 

@@ -22,6 +22,6 @@ std::string to_string( const T &n )
     return ost.str();
 }
 
-#endif // __MINGW32__
+#endif // defined( __MINGW32__) || defined(_MSC_VER)
 
 #endif //TRAFFIC_SIMULATION_HACK_H

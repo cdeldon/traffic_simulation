@@ -9,46 +9,35 @@
 
 class Car
 {
+    friend class Road;
+
     public:
         /**
          * definition of the types that
          * play a role for the Car class
          */
-        typedef float position;
-        typedef float velocity;
-        typedef float acceleration;
-        typedef float length;
+        typedef double position;
+        typedef double velocity;
+        typedef double acceleration;
+        typedef double length;
 
-        /**
-         * static constant variables that are
-         * the same for all objects of the
-         * type Car.
-         */
-        static const velocity V_DESIRED;
-        static const position DIST_DESIRED;
-        static const acceleration A_MAX;
-        static const acceleration D_MAX;
-        static const length LENGTH;
 
-        Car( const position, const unsigned int );
-
+        Car( const position);
+        Car( const position, const velocity);
         Car( const Car & );
 
-        position getPosition() const
-        {
-            return p;
-        }
+        position getPosition() const { return p; }
+        velocity getVelocity() const { return v; }
+        acceleration getAcceleration() const;
 
         std::string toString() const;
 
     private:
-        const unsigned int idx;
 
         position p;
         velocity v;
-
-        Car *nextCar = nullptr;
-        Car *prevCar = nullptr;
+        Car * nextCar;
+        Car * prevCar;
 };
 
 #endif //TRAFFIC_SIMULATION_CAR_H
