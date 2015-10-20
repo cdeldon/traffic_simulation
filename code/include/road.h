@@ -13,8 +13,9 @@ class Road
 {
     public:
         Road();
-
         Road( const std::vector<Car::position> & );
+
+        void populate(const std::vector<Car::position> &);
 
         void write( std::string filename );
 

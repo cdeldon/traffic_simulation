@@ -17,7 +17,7 @@ class Car
         typedef float position;
         typedef float velocity;
         typedef float acceleration;
-        typedef float dimension;
+        typedef float length;
 
         /**
          * static constant variables that are
@@ -28,7 +28,7 @@ class Car
         static const position DIST_DESIRED;
         static const acceleration A_MAX;
         static const acceleration D_MAX;
-        static const dimension LENGTH;
+        static const length LENGTH;
 
         Car( const position, const unsigned int );
 

@@ -23,7 +23,7 @@ struct Settings
     /**
      * Default settings
      */
-    static const Settings predifined;
+    static const Settings predefined;
 
     Settings();
 

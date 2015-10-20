@@ -10,7 +10,7 @@
 #include <sstream>
 #include <hack.h>
 
-const Settings Settings::predifined = Settings(1e5, 1e5f, 50.f, 5.f, 1.f, 2.f, 2.5f, 1.f);
+const Settings Settings::predefined = Settings(1e5, 1e5f, 50.f, 5.f, 1.f, 2.f, 2.5f, 1.f);
 
 Settings::Settings()
 {
