@@ -37,8 +37,9 @@ struct Obstacle
 class Road
 {
     public:
-        Road();
+        Road(Simulation const * const s = active_simulation);
         Road(const Road &);
+        Road(const Road &, Simulation const * const s);
         Road(double speed_limit, double time_headway, double space_headway, Simulation const * const s = active_simulation);
         Road(const std::vector<double> &pos, Simulation const * const s = active_simulation);
         ~Road();

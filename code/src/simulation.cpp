@@ -3,12 +3,12 @@
 #include <settings.h>
 
 Simulation::Simulation()
-    : time(0)
+    : time(0), road(this)
 {
 }
 
 Simulation::Simulation(Road & r)
-    : time(0)
+    : time(0), road(r, this)
 {
 }
 

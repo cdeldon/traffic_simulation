@@ -16,8 +16,8 @@
 
 extern Simulation * active_simulation;
 
-Road::Road()
-    : speed_limit(DEFAULT_SPEEDLIMIT), time_headway(DEFAULT_TIMEHEADWAY), space_headway(DEFAULT_SPACEHEADWAY), simulation(active_simulation)
+Road::Road(Simulation const * const s)
+    : Road(DEFAULT_SPEEDLIMIT, DEFAULT_TIMEHEADWAY, DEFAULT_SPACEHEADWAY, s)
 {
 }
 
@@ -27,7 +27,12 @@ Road::Road(double speed_limit, double time_headway, double space_headway, Simula
 }
 
 Road::Road(const Road & other)
-    : speed_limit(other.speed_limit), time_headway(other.time_headway), space_headway(other.space_headway), simulation(other.simulation)
+    : Road(other, other.simulation)
+{
+}
+
+Road::Road(const Road & other, Simulation const * const s)
+    : speed_limit(other.speed_limit), time_headway(other.time_headway), space_headway(other.space_headway), simulation(s)
 {
     cars.resize(other.cars.size());
     for (unsigned int i = 0; i < other.cars.size(); ++i) {
