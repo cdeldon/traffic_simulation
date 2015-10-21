@@ -1,16 +1,37 @@
+
 #include <simulation.h>
+#include <settings.h>
 
 Simulation::Simulation()
-    : timeStep(0), endTime(0), time(0)
+    : time(0)
 {
 }
 
 Simulation::Simulation(Road & r)
-    : road(r), timeStep(0), endTime(0), time(0)
+    : time(0)
 {
 }
 
-Simulation::Simulation(Road & r, double dt, double T)
-    : road(r), timeStep(dt), endTime(T)
+void Simulation::readSettings(const char* path)
 {
+    settings.readSettings(path);
+    applySettingsChange();
 }
+
+void Simulation::loadDefaultSettings()
+{
+    settings = Settings::predefined;
+    applySettingsChange();
+}
+
+void Simulation::applySettingsChange()
+{
+    road.setLength(settings.road_length);
+    road.populate(settings.n_cars);
+}
+
+Road const * Simulation::getRoad() const
+{
+    return &road;
+}
+

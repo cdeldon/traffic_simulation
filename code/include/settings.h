@@ -10,7 +10,7 @@
 struct Settings
 {
     unsigned int n_cars;
-    double meters;
+    double road_length;
 
     double v_desired;
     double d_desired;
@@ -19,6 +19,7 @@ struct Settings
     double car_size;
 
     double DT;
+    double end_T;
 
     /**
      * Default settings
@@ -28,11 +29,11 @@ struct Settings
     Settings();
 
     Settings( const unsigned int n, const double m, const double v, const double dist, const double a, const double dec,
-              const double s, const double t );
+              const double s, const double dt, const double T);
 
     std::string toString() const;
 
-    void readSettings( char *argv );
+    void readSettings(const char *path);
 };
 
 

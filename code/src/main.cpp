@@ -1,35 +1,40 @@
 #include <iostream>
 #include <vector>
-#include <road.h>
-#include <settings.h>
+
+#include <simulation.h>
 #include <common.h>
 
-Settings settings;
+
+
+
+
 #if defined(_MSC_VER) 
 	std::string outDir = "../output/";
 #else
 	std::string outDir = "../../output/";
 #endif
 
+Simulation * active_simulation;
+
 int main( int argc, char **argv )
 {
+
+    active_simulation = new Simulation();
+
     if ( argc == 1 )
     {
         std::cout << "Loaded predefined settings:" << std::endl;
-        settings = Settings::predefined;
+        active_simulation->loadDefaultSettings();
     }
     else if ( argc == 2 )
     {
 		std::cout << "Loaded settings from argv[1]:" << std::endl;
-        settings.readSettings(argv[1]);
+        active_simulation->readSettings(argv[1]);
     }
 
-    std::cout << settings.toString();
+    std::cout << active_simulation->getSettings()->toString();
 
-    std::vector<double> pos(10, 0.4f);
-    Road road(pos);
-
-    road.write(( outDir + "Car_position.dat" ).c_str());
+    active_simulation->getRoad()->writePositions((outDir + "Car_position.dat").c_str());
     std::cout << "Files have been written\n";
 
     return 1;

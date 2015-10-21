@@ -7,6 +7,8 @@
 
 #include <string>
 
+class Road;
+
 class Car
 {
     friend class Road;
@@ -22,9 +24,10 @@ class Car
         typedef double length;
 
 
-        Car( const position);
-        Car( const position, const velocity);
-        Car( const Car & );
+        Car(const position, const Road* const);
+        Car(const position, const velocity, const Road* const);
+        Car(const Car & );
+        Car(const Car &, const Road * const);
 
         position getPosition() const { return p; }
         velocity getVelocity() const { return v; }
@@ -32,12 +35,15 @@ class Car
 
         std::string toString() const;
 
+        unsigned int index() const;
+
     private:
 
         position p;
         velocity v;
-        Car * nextCar;
-        Car * prevCar;
+        Car * next_car;
+        Car * prev_car;
+        const Road * const road;
 };
 
 #endif //TRAFFIC_SIMULATION_CAR_H

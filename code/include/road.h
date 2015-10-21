@@ -5,11 +5,15 @@
 #ifndef TRAFFIC_SIMULATION_ROAD_H
 #define TRAFFIC_SIMULATION_ROAD_H
 
-#include <car.h>
 #include <common.h>
 #include <vector>
 #include <queue>
 #include <string>
+
+#include <car.h>
+
+class Simulation;
+extern Simulation * active_simulation;
 
 struct Obstacle
 {
@@ -19,27 +23,30 @@ struct Obstacle
     /**
      * New setpoints
      */
-    double speedLimit;	
-    double timeHeadway;	//  difference between the time when a vehicle arrives at a point on the highway and the time the next vehicle arrives at the same point
+    double speed_limit;	
+    double time_headway;	// difference between the time when a vehicle arrives at a point on the highway and the time the next vehicle arrives at the same point
+    double space_headway;   // desired minimum distance (gap) between vehicles
 
     
-    Obstacle(double start, double end, double speedLimit, double timeHeadway)
-             : start(start), end(end), speedLimit(speedLimit), timeHeadway(timeHeadway) {}
-    Obstacle(double start, double end, double speedLimit)
-             : start(start), end(end), speedLimit(speedLimit), timeHeadway(INF) {}
+    Obstacle(double start, double end, double speed_limit, double time_headway, double space_headway)
+             : start(start), end(end), speed_limit(speed_limit), time_headway(time_headway), space_headway(space_headway) {}
+    Obstacle(double start, double end, double speed_limit)
+             : start(start), end(end), speed_limit(speed_limit), time_headway(0), space_headway(0) {}
 };
 
 class Road
 {
     public:
         Road();
-        Road(const std::vector<Car::position> &);
-        ~Road() { cars.clear(); }
+        Road(const Road &);
+        Road(double speed_limit, double time_headway, double space_headway, Simulation const * const s = active_simulation);
+        Road(const std::vector<double> &pos, Simulation const * const s = active_simulation);
+        ~Road();
 
         void populate(const std::vector<Car::position> &);
         void populate(unsigned int n);
 
-        void write(std::string filename);
+        void writePositions(std::string filename) const;
 
 		double getLength() const;
 
@@ -49,17 +56,34 @@ class Road
 		void addTrafficLight();
 		void clearTrafficLights();
 
-		double getSpeedLimit(double x) const;
-		double getTimeHeadway(double x) const;
+		double speedLimit(double x) const;
+		double timeHeadway(double x) const;
+        double spaceHeadway(double x) const;
+
+        unsigned int find(const Car *) const;
+
+        void setLength(double l) { length = l; }
+        void setSpeedLimit(double s) { speed_limit = s; }
+        void setTimeHeadway(double t) { time_headway = t; }
+        void setSpaceHeadway(double d) { space_headway = d; }
+
+        const Simulation * const getSimulation() const { return simulation; }
 
     private:
         void reIndex() const;
 
 		std::vector<Obstacle> obstacles;
 		std::vector<Car *> cars;
+
 		double length;
-		double speedLimit;
-		double timeHeadway;
+
+        const Simulation * const simulation;
+
+        // General (default) values. Used when no obstacle is present.
+		double speed_limit;
+		double time_headway;
+        double space_headway;
+
 };
 
 

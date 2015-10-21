@@ -1,8 +1,12 @@
-N_CARS = 50
-METERS = 1000
-VMAX = 50
-DIST = 5
-AMAX = 1
-DMAX = 2
-SIZE = 2.5
-DT = 1
+Hey, we can put any comment we like in here, and it will be ignored!
+
+N_CARS    = 50
+ROAD_LENGTH = 1000
+VMAX      = 50
+MIN_DIST  = 2
+AMAX      = 1
+DMAX      = 2
+CAR_SIZE  = 5
+DT        = 1
+END_TIME  = 3000
+
