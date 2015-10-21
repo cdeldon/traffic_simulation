@@ -5,6 +5,9 @@ IF(MSVC)
     
 ELSE(MSVC)
     SET(CMAKE_CXX_FLAGS "-std=c++11")
+    IF(MINGW)
+        add_definitions( -D__NO_INLINE__ )
+    ENDIF(MINGW)
 ENDIF(MSVC)
 
 include_directories(include)
