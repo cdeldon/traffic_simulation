@@ -34,8 +34,12 @@ int main( int argc, char **argv )
 
     std::cout << active_simulation->getSettings()->toString();
 
+    active_simulation -> run();
+
+    // TODO add time stamp to the path
     active_simulation->getRoad()->writePositions((outDir + "Car_position.dat").c_str());
-    std::cout << "Files have been written\n";
+
+    std::cout << "Execution completed\n";
 
     return 1;
 }

@@ -60,8 +60,8 @@ void Road::reIndex() const
         cars[i]->prev_car = cars[i - 1];
         cars[i - 1]->next_car = cars[i];
     }
-    cars[0]->next_car = NULL;
-    cars[cars.size() - 1]->prev_car = NULL;
+    cars[0]->prev_car = cars[cars.size()-1];
+    cars[cars.size() - 1]->next_car = cars[0];
 }
 
 
@@ -77,7 +77,7 @@ void Road::populate(const std::vector<Car::position> & pos)
 
 void Road::populate(unsigned int n)
 {
-    cars.clear();
+    cars.clear(); //TODO: MEMORY LEAK!!!!!!
     cars.resize(n);
     for (unsigned int i = 0; i < n; ++i) {
         cars[i] = new Car(length/n * i, this);
@@ -166,4 +166,9 @@ unsigned int Road::find(const Car * c) const
             return i;
 
     return -1;
+}
+
+void Road::update(const double dt)
+{
+    // update each car's position, handle cars exitig the road, spawn new ones
 }

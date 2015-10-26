@@ -21,6 +21,9 @@ struct Settings
     double DT;
     double end_T;
 
+    //TODO output settings and flags
+    std::string ID;
+
     /**
      * Default settings
      */

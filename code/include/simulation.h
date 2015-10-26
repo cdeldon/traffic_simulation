@@ -14,6 +14,8 @@ public:
     const Settings* getSettings() const { return &settings; }
     Road const * getRoad() const;
 
+    void run();
+
 private:
     void applySettingsChange();
     Settings settings;

@@ -70,10 +70,13 @@ class Road
 
         const Simulation * const getSimulation() const { return simulation; }
 
+        void update(const double dt);
+
     private:
         void reIndex() const;
 
 		std::vector<Obstacle> obstacles;
+        // TODO Keep this as values not as pointers
 		std::vector<Car *> cars;
 
 		double length;

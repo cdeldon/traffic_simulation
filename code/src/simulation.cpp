@@ -28,10 +28,17 @@ void Simulation::applySettingsChange()
 {
     road.setLength(settings.road_length);
     road.populate(settings.n_cars);
+    // add obstacles to road
 }
 
 Road const * Simulation::getRoad() const
 {
     return &road;
+}
+
+void Simulation::run()
+{
+    // TODO: call Road::update() looping over time
+    // write out the data depending on OUT_FREQ
 }
 

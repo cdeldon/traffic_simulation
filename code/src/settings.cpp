@@ -42,6 +42,8 @@ std::string Settings::toString() const
            "\nDT:\t\t\t" + to_string(DT) + "\t[s]" +
            "\nEnd Time:\t\t" + to_string(end_T) + "\t[s]\n\n";
 
+    //TODO complete with new settings parameters
+
 }
 
 
@@ -53,8 +55,22 @@ void extractFeature( std::string line, std::string feature, T &store )
         std::size_t position = line.find('=');
         if (position == std::string::npos)
             std::cout << "Invalid setting, mising '=': " << line << std::endl;
+
         std::string stringFeature = line.substr(position + 1);
+
         store = strtod(stringFeature.c_str(), 0);
+    }
+}
+
+void extractString( std::string line, std::string feature, std::string &store )
+{
+    if ( line.find(feature) != std::string::npos )
+    {
+        std::size_t position = line.find('=');
+        if (position == std::string::npos)
+            std::cout << "Invalid setting, mising '=': " << line << std::endl;
+
+        store = line.substr(position + 2);
     }
 }
 
@@ -78,6 +94,7 @@ void Settings::readSettings( const char *path )
             extractFeature(line, "CAR_SIZE", car_size);
             extractFeature(line, "DT", DT);
             extractFeature(line, "END_TIME", end_T);
+            extractString(line, "ID", ID);
         }
     }
     else

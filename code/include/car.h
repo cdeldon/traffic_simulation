@@ -37,6 +37,8 @@ class Car
 
         unsigned int index() const;
 
+        void update_postion(const double dt);
+
     private:
 
         position p;
