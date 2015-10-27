@@ -33,7 +33,7 @@ Car::acceleration Car::getAcceleration() const
     // The ODE's right hand side should go here (not complete yet)
     Settings const * const settings = road->getSimulation()->getSettings();
 
-    return settings -> a_max * (1 - pow(v/settings->v_desired, 4));
+    return settings -> a_max * (1 - pow(v/road->speedLimit(p), 4));
 }
 
 std::string Car::toString() const
