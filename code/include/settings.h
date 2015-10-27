@@ -6,6 +6,8 @@
 #define TRAFFIC_SIMULATION_SETTINGS_H
 
 #include <string>
+#include <vector>
+#include <road.h>
 
 struct Settings
 {
@@ -21,8 +23,16 @@ struct Settings
     double DT;
     double end_T;
 
+
     //TODO output settings and flags
     std::string ID;
+    bool output_positions;
+    bool output_velocities;
+    bool output_throughput;
+    int output_freq;
+
+    std::vector<Obstacle> obstacles;
+    std::vector<TrafficLight> traffic_lights;
 
     /**
      * Default settings
@@ -37,6 +47,12 @@ struct Settings
     std::string toString() const;
 
     void readSettings(const char *path);
+
+private:
+    template< typename T > void extractFeature(std::string line, std::string feature, T &store);
+    void Settings::extractString(std::string line, std::string feature, std::string &store);
+    void extractObstacle(const std::string &);
+    void extractLight(const std::string &);
 };
 
 

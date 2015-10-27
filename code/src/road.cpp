@@ -103,10 +103,16 @@ double Road::getLength() const
 	return length;
 }
 
-void Road::addObstacle(Obstacle & o)
+void Road::addObstacle(const Obstacle & o)
 {
 	obstacles.push_back(o);
 }
+
+void Road::addTrafficLight(const TrafficLight & l)
+{
+    traffic_lights.push_back(l);
+}
+
 
 void Road::clearObstacles()
 {
@@ -160,7 +166,6 @@ double Road::spaceHeadway(double x) const
 
 unsigned int Road::find(const Car * c) const
 {
-    // TODO: this should be binary search (positions are ordered)
     for (unsigned int i = 0; i < cars.size(); ++i)
         if (cars[i] == c)
             return i;

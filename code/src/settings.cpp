@@ -26,13 +26,19 @@ Settings::Settings( const unsigned int n, const double m, const double v, const 
           d_max(dec),
           car_size(s),
           DT(dt),
-          end_T(T)
+          end_T(T),
+          ID("simulation"),
+          output_positions(1),
+          output_velocities(0),
+          output_throughput(1),
+          output_freq(1)
 {
 }
 
 std::string Settings::toString() const
 {
-    return "Simulation settings:\n\nNumber of cars:\t\t" + to_string(n_cars) + "\t[cars]" +
+    return "Simulation settings:\n\nID = \"" + ID + "\""
+           "\nNumber of cars:\t\t" + to_string(n_cars) + "\t[cars]" +
            "\nStreet length:\t\t" + to_string(road_length) + "\t[m]" +
            "\nDesired Velocity: \t" + to_string(v_desired) + "\t[m/s]" +
            "\nDesired Distance: \t" + to_string(d_desired) + "\t[m]" +
@@ -48,7 +54,7 @@ std::string Settings::toString() const
 
 
 template< typename T >
-void extractFeature( std::string line, std::string feature, T &store )
+void Settings::extractFeature( std::string line, std::string feature, T &store )
 {
     if ( line.find(feature) != std::string::npos )
     {
@@ -62,7 +68,7 @@ void extractFeature( std::string line, std::string feature, T &store )
     }
 }
 
-void extractString( std::string line, std::string feature, std::string &store )
+void Settings::extractString(std::string line, std::string feature, std::string &store)
 {
     if ( line.find(feature) != std::string::npos )
     {
@@ -72,6 +78,28 @@ void extractString( std::string line, std::string feature, std::string &store )
 
         store = line.substr(position + 2);
     }
+}
+
+void Settings::extractObstacle(const std::string & str)
+{
+    if (str.find("OBSTACLE") == std::string::npos)
+        return;
+    Obstacle o;
+    std::stringstream ss;
+    ss << str.substr(8); //cut off "OBSTACLE"
+    ss >> o.start >> o.end >> o.speed_limit >> o.time_headway >> o.space_headway;
+    obstacles.push_back(o);
+}
+
+void Settings::extractLight(const std::string & str)
+{
+    if (str.find("LIGHT") == std::string::npos)
+        return;
+    TrafficLight l;
+    std::stringstream ss;
+    ss << str.substr(5); // cut off "LIGHT"
+    ss >> l.pos >> l.period >> l.duty_cycle;
+    traffic_lights.push_back(l);
 }
 
 /**
@@ -94,7 +122,14 @@ void Settings::readSettings( const char *path )
             extractFeature(line, "CAR_SIZE", car_size);
             extractFeature(line, "DT", DT);
             extractFeature(line, "END_TIME", end_T);
-            extractString(line, "ID", ID);
+            extractString(line,  "ID", ID);
+            extractFeature(line, "POSITIONS", output_positions);
+            extractFeature(line, "VELOCITIES", output_velocities);
+            extractFeature(line, "THROUGHPUT", output_throughput);
+            extractFeature(line, "OUT_FREQ", output_freq);
+
+            extractObstacle(line);
+            extractLight(line);
         }
     }
     else

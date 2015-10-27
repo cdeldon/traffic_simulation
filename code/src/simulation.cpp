@@ -28,7 +28,12 @@ void Simulation::applySettingsChange()
 {
     road.setLength(settings.road_length);
     road.populate(settings.n_cars);
-    // add obstacles to road
+
+    road.clearObstacles();
+    for (unsigned int i = 0; i < settings.obstacles.size(); ++i)
+        road.addObstacle(settings.obstacles[i]);
+    for (unsigned int i = 0; i < settings.traffic_lights.size(); ++i)
+        road.addTrafficLight(settings.traffic_lights[i]);
 }
 
 Road const * Simulation::getRoad() const

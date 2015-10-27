@@ -1,6 +1,6 @@
 # Hey, we can put any comment we like in here, and it will be ignored!
 
-// TODO: Differentiate initial umber and desired number of cars
+# TODO: Differentiate initial umber and desired number of cars
 N_CARS    = 50
 N_DESIRED = 100
 ROAD_LENGTH = 1000
@@ -12,7 +12,6 @@ CAR_SIZE  = 5
 DT        = 1
 END_TIME  = 3000
 
-# TODO
 
 # Output format
 ID = test
@@ -21,13 +20,10 @@ VELOCITIES = 1
 OUT_FREQ = 4
 THROUGHPUT = 1
 
-
-# TODO read obstacle: start, end, speed, time, space
 OBSTACLE 1000 2000 20 2 10
 OBSTACLE 3000 4000 20 2 10
 OBSTACLE 5000 7000 20 2 10
 
-# TODO read traffic lights: pos period duty_cycle(percentage green)
 LIGHT 1 2 0.3
 LIGHT 3 5 0.3
 LIGHT 6 7 0.3

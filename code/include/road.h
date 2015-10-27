@@ -10,29 +10,11 @@
 #include <queue>
 #include <string>
 
+#include <obstacle.h>
 #include <car.h>
 
 class Simulation;
 extern Simulation * active_simulation;
-
-struct Obstacle
-{
-	double start;		// position of the start of the obstacle
-    double end;			// position of the end of the obstacle
-
-    /**
-     * New setpoints
-     */
-    double speed_limit;	
-    double time_headway;	// difference between the time when a vehicle arrives at a point on the highway and the time the next vehicle arrives at the same point
-    double space_headway;   // desired minimum distance (gap) between vehicles
-
-    
-    Obstacle(double start, double end, double speed_limit, double time_headway, double space_headway)
-             : start(start), end(end), speed_limit(speed_limit), time_headway(time_headway), space_headway(space_headway) {}
-    Obstacle(double start, double end, double speed_limit)
-             : start(start), end(end), speed_limit(speed_limit), time_headway(0), space_headway(0) {}
-};
 
 class Road
 {
@@ -51,10 +33,10 @@ class Road
 
 		double getLength() const;
 
-		void addObstacle(Obstacle &);
+		void addObstacle(const Obstacle &);
 		void clearObstacles();
 
-		void addTrafficLight();
+		void addTrafficLight(const TrafficLight &);
 		void clearTrafficLights();
 
 		double speedLimit(double x) const;
@@ -76,6 +58,7 @@ class Road
         void reIndex() const;
 
 		std::vector<Obstacle> obstacles;
+        std::vector<TrafficLight> traffic_lights;
         // TODO Keep this as values not as pointers
 		std::vector<Car *> cars;
 
