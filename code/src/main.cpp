@@ -20,11 +20,10 @@ int main( int argc, char **argv )
 {
 
     active_simulation = new Simulation();
-
+    active_simulation->loadDefaultSettings();
     if ( argc == 1 )
     {
         std::cout << "Loaded predefined settings:" << std::endl;
-        active_simulation->loadDefaultSettings();
     }
     else if ( argc == 2 )
     {
@@ -37,7 +36,7 @@ int main( int argc, char **argv )
     active_simulation -> run();
 
     // TODO add time stamp to the path
-    active_simulation->getRoad()->writePositions((outDir + "Car_position.dat").c_str());
+    active_simulation->getRoad()->writePositions((outDir + active_simulation->getSettings()->ID + ".dat").c_str());
 
     std::cout << "Execution completed\n";
 

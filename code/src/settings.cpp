@@ -37,8 +37,9 @@ Settings::Settings( const unsigned int n, const double m, const double v, const 
 
 std::string Settings::toString() const
 {
-    return "Simulation settings:\n\nID = \"" + ID + "\""
-           "\nNumber of cars:\t\t" + to_string(n_cars) + "\t[cars]" +
+    std::string res = std::string("==========================================================\nSimulation settings:\n") +
+           "\nID = \"" + ID + "\""
+           "\nInitial number of cars:\t" + to_string(n_cars) + "\t[cars]" +
            "\nStreet length:\t\t" + to_string(road_length) + "\t[m]" +
            "\nDesired Velocity: \t" + to_string(v_desired) + "\t[m/s]" +
            "\nDesired Distance: \t" + to_string(d_desired) + "\t[m]" +
@@ -46,9 +47,14 @@ std::string Settings::toString() const
            "\nMaximum deceleration:\t" + to_string(d_max) + "\t[m/s^2]" +
            "\nCar Size:\t\t" + to_string(car_size) + "\t[m]" +
            "\nDT:\t\t\t" + to_string(DT) + "\t[s]" +
-           "\nEnd Time:\t\t" + to_string(end_T) + "\t[s]\n\n";
+           "\nEnd Time:\t\t" + to_string(end_T) + "\t[s]" +
+           "\nOutput positions:\t" + to_string(output_positions) +
+           "\nOutput velocities:\t" + to_string(output_velocities) +
+           "\nOutput throughput:\t" + to_string(output_throughput) +
+           "\nWrite output every\t" + to_string(output_freq) + " [DT] = " + to_string(output_freq*DT) + " [s]" +
+           "\n==========================================================\n";
 
-    //TODO complete with new settings parameters
+    return res;
 
 }
 
