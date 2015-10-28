@@ -1,0 +1,1 @@
+The folder `protected` contains references that normally have paid access, e.g. books. As they should not be publicly available on GitHub, they are stored in a password protected archive. Contact us if you need access.
