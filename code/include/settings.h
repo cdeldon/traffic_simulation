@@ -50,7 +50,7 @@ struct Settings
 
 private:
     template< typename T > void extractFeature(std::string line, std::string feature, T &store);
-    void Settings::extractString(std::string line, std::string feature, std::string &store);
+    void extractString(std::string line, std::string feature, std::string &store);
     void extractObstacle(const std::string &);
     void extractLight(const std::string &);
 };
