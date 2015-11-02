@@ -53,4 +53,8 @@ Thumbs.db
 #########
 ./code/build/*
 
+# TEMPORARY LINUX FILES #
+#########################
+*.*~
+
 
