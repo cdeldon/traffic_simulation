@@ -7,8 +7,8 @@
 #include <iomanip>
 #include <algorithm>
 
-#include <car.h>
 #include <simulation.h>
+#include <iostream>
 
 #define DEFAULT_SPEEDLIMIT 30.0
 #define DEFAULT_TIMEHEADWAY 1.5
@@ -89,6 +89,7 @@ void Road::populate(unsigned int n)
 void Road::writePositions(std::string filename) const
 {
     std::ofstream out(filename.c_str());
+
     out << std::setprecision(5);
 	for (unsigned int i = 0; i < cars.size(); ++i)
     {
@@ -176,4 +177,8 @@ unsigned int Road::find(const Car * c) const
 void Road::update(const double dt)
 {
     // update each car's position, handle cars exitig the road, spawn new ones
+    for(unsigned int id = 0; id < cars.size(); ++ id)
+    {
+        cars[id]->update_postion(dt);
+    }
 }

@@ -17,4 +17,5 @@ file(GLOB SOURCES "src/*.cpp")
 file(GLOB HEADERS "include/*.h")
 
 set(EXECUTABLE_OUTPUT_PATH "./bin/")
+set(CMAKE_RUNTIME_DIRECTORY ${CMAKE_BINARY_DIR})
 add_executable(traffic_simulation ${SOURCES} ${HEADERS})

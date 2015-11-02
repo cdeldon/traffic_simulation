@@ -2,10 +2,6 @@
 #include <vector>
 
 #include <simulation.h>
-#include <common.h>
-
-
-
 
 
 #if defined(_MSC_VER) 
@@ -37,6 +33,7 @@ int main( int argc, char **argv )
 
     // TODO add time stamp to the path
     active_simulation->getRoad()->writePositions((outDir + active_simulation->getSettings()->ID + ".dat").c_str());
+    std::cout<<(outDir + active_simulation->getSettings()->ID + ".dat");
 
     std::cout << "Execution completed\n";
 

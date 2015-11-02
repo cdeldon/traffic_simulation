@@ -47,3 +47,9 @@ unsigned int Car::index() const
     return road->find(this);
 }
 
+void Car::update_postion(const double dt)
+{
+    // TODO implement car dynamics
+    this->p += 0.0001;
+}
+
