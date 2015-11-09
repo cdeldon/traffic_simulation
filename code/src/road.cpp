@@ -95,6 +95,14 @@ void Road::writePositions(std::string filename) const
     {
 		out << cars[i]->toString() << " \t ";
     }
+    out << std::endl;
+
+    for (unsigned int i = 0; i < cars.size(); ++i)
+    {
+        out << cars[i]->getVelocity() << " \t ";
+    }
+
+    out << std::endl;
     out.close();
 }
 
@@ -165,7 +173,7 @@ double Road::spaceHeadway(double x) const
     return result;
 }
 
-unsigned int Road::find(const Car * c) const
+int Road::find(const Car * c) const
 {
     for (unsigned int i = 0; i < cars.size(); ++i)
         if (cars[i] == c)

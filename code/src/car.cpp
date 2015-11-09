@@ -6,6 +6,7 @@
 #include <simulation.h>
 #include <common.h>
 #include <math.h>
+#include <cmath>
 
 
 Car::Car(const position pos, const Road* const r)
@@ -33,7 +34,18 @@ Car::acceleration Car::getAcceleration() const
     // The ODE's right hand side should go here (not complete yet)
     Settings const * const settings = road->getSimulation()->getSettings();
 
-    return settings -> a_max * (1 - pow(v/road->speedLimit(p), 4));
+    // exponent in ODE
+    const double delta = 4.f;
+
+    double deltaV = this->v  -  this->next_car->v;
+
+    double s_star = road -> spaceHeadway(this->p)
+                    + std::max(0. , this->v * road->timeHeadway(this->p) +
+                                   (this->v*deltaV)/(2*std::sqrt(settings->a_max * settings->d_max)));
+
+    double s_alpha = this->next_car->p - this->p - settings->car_size;
+
+    return std::max(0., settings->a_max * (1. - std::pow(v/road->speedLimit(p), delta) - std::pow(s_star/s_alpha, 2.)));
 }
 
 std::string Car::toString() const
@@ -49,7 +61,11 @@ unsigned int Car::index() const
 
 void Car::update_postion(const double dt)
 {
-    // TODO implement car dynamics
-    this->p += 0.0001;
+    // The ODE's right hand side should go here (not complete yet)
+    Settings const * const settings = road->getSimulation()->getSettings();
+
+    // update the car position with a symplectic integration
+    this -> v += getAcceleration() * settings->DT;
+    this -> p += this -> v * settings->DT;
 }
 

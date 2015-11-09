@@ -10,7 +10,7 @@
 #include <sstream>
 #include <hack.h>
 
-const Settings Settings::predefined = Settings(1e5, 1e5f, 50.f, 5.f, 1.f, 2.f, 2.5f, 1.f, 40*60);
+const Settings Settings::predefined = Settings(1e5, 1e5f, 20.f, 5.f, 1.f, 2.f, 2.5f, 1.f, 40*60);
 
 Settings::Settings()
 {
@@ -20,7 +20,7 @@ Settings::Settings( const unsigned int n, const double m, const double v, const 
                     const double dec, const double s, const double dt , const double T)
         : n_cars(n),
           road_length(m),
-          v_desired(to_ms(v)),
+          v_desired(v),
           d_desired(dist),
           a_max(a),
           d_max(dec),

@@ -4,7 +4,7 @@
 N_CARS    = 50
 #N_DESIRED = 100
 ROAD_LENGTH = 1000
-VMAX      = 50
+VMAX      = 40
 MIN_DIST  = 2
 AMAX      = 1
 DMAX      = 2

@@ -43,7 +43,7 @@ class Road
 		double timeHeadway(double x) const;
         double spaceHeadway(double x) const;
 
-        unsigned int find(const Car *) const;
+        int find(const Car *) const;
 
         void setLength(double l) { length = l; }
         void setSpeedLimit(double s) { speed_limit = s; }
