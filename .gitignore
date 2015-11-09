@@ -62,3 +62,9 @@ Thumbs.db
 *.dat
 
 
+code/.idea/.name
+code/.idea/code.iml
+code/.idea/misc.xml
+code/.idea/modules.xml
+code/.idea/vcs.xml
+code/.idea/workspace.xml
