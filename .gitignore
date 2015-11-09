@@ -47,7 +47,7 @@ Thumbs.db
 
 # CLION #
 #########
-./code/.idea
+./code/.idea/*
 
 # BUILD #
 #########
