@@ -20,5 +20,4 @@ extern Simulation * active_simulation;
 #endif
 
 
-
 #endif //TRAFFIC_SIMULATION_COMMON_H

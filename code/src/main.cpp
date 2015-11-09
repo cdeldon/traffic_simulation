@@ -25,10 +25,6 @@ int main( int argc, char **argv )
 
     active_simulation -> run();
 
-    // TODO add time stamp to the path
-    active_simulation->getRoad()->writePositions((outDir + active_simulation->getSettings()->ID + ".dat").c_str());
-    std::cout<<(outDir + active_simulation->getSettings()->ID + ".dat");
-
     std::cout << "Execution completed\n";
 
     return 1;
