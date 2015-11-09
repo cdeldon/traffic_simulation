@@ -13,6 +13,12 @@ class Simulation;
 
 extern Simulation * active_simulation;
 
+#if defined(_MSC_VER)
+    static std::string outDir = "../output/";
+#else
+    static std::string outDir = "../../output/";
+#endif
+
 
 
 #endif //TRAFFIC_SIMULATION_COMMON_H

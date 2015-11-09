@@ -1,14 +1,8 @@
 #include <iostream>
 #include <vector>
-
+#include <common.h>
 #include <simulation.h>
 
-
-#if defined(_MSC_VER) 
-	std::string outDir = "../output/";
-#else
-	std::string outDir = "../../output/";
-#endif
 
 Simulation * active_simulation;
 

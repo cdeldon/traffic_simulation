@@ -55,7 +55,7 @@ void Simulation::run()
         {
             ++printStep;
             // TODO set the string for the ouput path
-            road.writePositions("../../output/cars" + to_string(printStep) + ".dat");
+            road.writePositions( outDir + "cars" + to_string(printStep) + ".dat");
         }
 
         drawProgress(((float) step)/(settings.end_T*1./settings.DT),
