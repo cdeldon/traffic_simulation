@@ -1,10 +1,10 @@
 # Hey, we can put any comment we like in here, and it will be ignored!
 
 # TODO: Differentiate initial umber and desired number of cars ?
-N_CARS    = 50
+N_CARS    = 20
 #N_DESIRED = 100
 ROAD_LENGTH = 1000
-VMAX      = 40
+VMAX      = 30
 MIN_DIST  = 2
 TIME_HEAD = 2
 AMAX      = 1

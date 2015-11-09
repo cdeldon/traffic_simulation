@@ -186,7 +186,6 @@ int Road::find(const Car * c) const
 
 void Road::update(const double dt)
 {
-    // update each car's position, handle cars exitig the road, spawn new ones
     for(unsigned int id = 0; id < cars.size(); ++ id)
     {
         cars[id]->update_postion(dt);
