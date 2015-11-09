@@ -27,6 +27,9 @@ void Simulation::loadDefaultSettings()
 
 void Simulation::applySettingsChange()
 {
+    road.setSpeedLimit(settings.v_desired);
+    road.setSpaceHeadway(settings.d_desired);
+    road.setTimeHeadway(settings.t_desired);
     road.setLength(settings.road_length);
     road.populate(settings.n_cars);
 

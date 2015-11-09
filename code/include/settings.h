@@ -16,6 +16,7 @@ struct Settings
 
     double v_desired;
     double d_desired;
+    double t_desired;
     double a_max;
     double d_max;
     double car_size;

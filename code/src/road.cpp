@@ -10,16 +10,18 @@
 #include <simulation.h>
 #include <iostream>
 
-#define DEFAULT_SPEEDLIMIT 30.0
-#define DEFAULT_TIMEHEADWAY 1.5
-#define DEFAULT_SPACEHEADWAY 2
-
 extern Simulation * active_simulation;
+
+#define DEFAULT_SPEEDLIMIT (s->getSettings()->v_desired)
+#define DEFAULT_TIMEHEADWAY (s->getSettings()->t_desired)
+#define DEFAULT_SPACEHEADWAY (s->getSettings()->d_desired)
+
 
 Road::Road(Simulation const * const s)
     : Road(DEFAULT_SPEEDLIMIT, DEFAULT_TIMEHEADWAY, DEFAULT_SPACEHEADWAY, s)
 {
 }
+
 
 Road::Road(double speed_limit, double time_headway, double space_headway, Simulation const * const s)
     : speed_limit(speed_limit), time_headway(time_headway), space_headway(space_headway), simulation(s)

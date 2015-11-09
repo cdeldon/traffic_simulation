@@ -10,9 +10,24 @@
 #include <sstream>
 #include <hack.h>
 
-const Settings Settings::predefined = Settings(1e5, 1e5f, 20.f, 5.f, 1.f, 2.f, 2.5f, 1.f, 40*60);
+const Settings Settings::predefined = Settings();
 
 Settings::Settings()
+    : n_cars(100),
+      road_length(1000),
+      v_desired(30),
+      d_desired(2),
+      a_max(1),
+      d_max(1),
+      t_desired(2),
+      car_size(5),
+      DT(1),
+      end_T(40*60),
+      ID("simulation"),
+      output_positions(1),
+      output_velocities(0),
+      output_throughput(1),
+      output_freq(1)
 {
 }
 
@@ -24,6 +39,7 @@ Settings::Settings( const unsigned int n, const double m, const double v, const 
           d_desired(dist),
           a_max(a),
           d_max(dec),
+          t_desired(2),
           car_size(s),
           DT(dt),
           end_T(T),
@@ -43,10 +59,11 @@ std::string Settings::toString() const
            "\nStreet length:\t\t" + to_string(road_length) + "\t[m]" +
            "\nDesired Velocity: \t" + to_string(v_desired) + "\t[m/s]" +
            "\nDesired Distance: \t" + to_string(d_desired) + "\t[m]" +
+           "\nDesired Time Headway: \t" + to_string(t_desired) + "\t[s]" +
            "\nMaximum Acceleration:\t" + to_string(a_max) + "\t[m/s^2]" +
            "\nMaximum deceleration:\t" + to_string(d_max) + "\t[m/s^2]" +
            "\nCar Size:\t\t" + to_string(car_size) + "\t[m]" +
-           "\nDT:\t\t\t" + to_string(DT) + "\t[s]" +
+           "\nTime step DT: \t\t" + to_string(DT) + "\t[s]" +
            "\nEnd Time:\t\t" + to_string(end_T) + "\t[s]" +
            "\nOutput positions:\t" + to_string(output_positions) +
            "\nOutput velocities:\t" + to_string(output_velocities) +
@@ -123,6 +140,7 @@ void Settings::readSettings( const char *path )
             extractFeature(line, "ROAD_LENGTH", road_length);
             extractFeature(line, "VMAX", v_desired);
             extractFeature(line, "MIN_DIST", d_desired);
+            extractFeature(line, "TIME_HEAD", t_desired);
             extractFeature(line, "AMAX", a_max);
             extractFeature(line, "DMAX", d_max);
             extractFeature(line, "CAR_SIZE", car_size);
