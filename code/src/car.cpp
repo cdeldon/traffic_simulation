@@ -48,7 +48,9 @@ Car::acceleration Car::getAcceleration() const
         s_alpha += road->getLength();
     s_alpha -= settings->car_size;
 
-    return std::max(0., settings->a_max * (1. - std::pow(v/road->speedLimit(p), delta) - std::pow(s_star/s_alpha, 2.)));
+    double limit_term = std::pow(v / road->speedLimit(p), delta);
+
+    return settings->a_max * (1. - limit_term - std::pow(s_star/s_alpha, 2.));
 }
 
 std::string Car::toString() const

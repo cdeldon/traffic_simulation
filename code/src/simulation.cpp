@@ -71,7 +71,7 @@ void Simulation::run()
             }
             if (settings.output_velocities) {
                 out << "\t";
-                std::vector<double> v = road.getPositions();
+                std::vector<double> v = road.getVelocities();
                 for (unsigned int i = 0; i < v.size(); ++i)
                     out << v[i] << "\t";
             }
@@ -100,13 +100,13 @@ void Simulation::drawProgress(double percent, double oldpercent, unsigned int l)
     std::string Old;
     std::string New;
 
-    for (int i=0; i<l; ++i) {
-        if(i < int(l * percent))
+    for (unsigned int i = 0; i<l; ++i) {
+        if(i < unsigned int(l * percent))
             New += "#";
         else {
             New += " ";
         }
-        if(i < int(l * oldpercent))
+        if (i < unsigned int(l * oldpercent))
             Old += "#";
         else {
             Old += " ";

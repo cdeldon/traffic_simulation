@@ -1,16 +1,14 @@
 # Hey, we can put any comment we like in here, and it will be ignored!
 
-# TODO: Differentiate initial umber and desired number of cars ?
-N_CARS    = 20
-#N_DESIRED = 100
+N_CARS    = 50
 ROAD_LENGTH = 1000
 VMAX      = 30
 MIN_DIST  = 2
-TIME_HEAD = 2
-AMAX      = 1
-DMAX      = 2
+TIME_HEAD = 1.5
+AMAX      = 0.6
+DMAX      = 1.1
 CAR_SIZE  = 5
-DT        = 1
+DT        = 0.25
 END_TIME  = 3000
 
 
@@ -18,9 +16,11 @@ END_TIME  = 3000
 ID = test
 POSITIONS = 1
 VELOCITIES = 1
-OUT_FREQ = 4
+OUT_FREQ = 16
 THROUGHPUT = 1
 
+
+#OBSTACLE start end speed time space
 OBSTACLE 1000 2000 20 2 10
 OBSTACLE 3000 4000 20 2 10
 OBSTACLE 5000 7000 20 2 10
