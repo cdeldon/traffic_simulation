@@ -223,4 +223,7 @@ void Road::update(const double dt)
     {
         cars[id]->update_postion(dt);
     }
+
+    //sorting - required for plotting?
+    std::sort(cars.begin(), cars.end(), &Car::comp);
 }
