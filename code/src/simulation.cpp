@@ -1,15 +1,16 @@
 
 #include <simulation.h>
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 
 Simulation::Simulation()
-    : time(0), road(this)
+    : time(0), road(this), fname(outDir + "cars" + ".dat")
 {
 }
 
 Simulation::Simulation(Road & r)
-    : time(0), road(r, this)
+    : time(0), road(r, this), fname(outDir + "cars" + ".dat")
 {
 }
 
@@ -27,6 +28,8 @@ void Simulation::loadDefaultSettings()
 
 void Simulation::applySettingsChange()
 {
+    this->fname = outDir + "cars_" + settings.ID + ".dat";
+
     road.setSpeedLimit(settings.v_desired);
     road.setSpaceHeadway(settings.d_desired);
     road.setTimeHeadway(settings.t_desired);
@@ -47,6 +50,9 @@ Road const * Simulation::getRoad() const
 
 void Simulation::run()
 {
+    // open output file
+    std::ofstream out(fname.c_str());
+
     unsigned int step = 0;
     unsigned int printStep = 0;
     std::cout<<"\n\n\t\tPROGRESS:\n";
@@ -57,8 +63,22 @@ void Simulation::run()
         if(step % settings.output_freq == 1)
         {
             ++printStep;
-            // TODO set the string for the ouput path
-            road.writePositions( outDir + "cars" + to_string(printStep) + ".dat");
+            out << t << "\t\t";
+            if (settings.output_positions) {
+                std::vector<double> p = road.getPositions();
+                for (unsigned int i = 0; i < p.size(); ++i)
+                    out << p[i] << "\t";
+            }
+            if (settings.output_velocities) {
+                out << "\t";
+                std::vector<double> v = road.getPositions();
+                for (unsigned int i = 0; i < v.size(); ++i)
+                    out << v[i] << "\t";
+            }
+            if (settings.output_positions) {
+               out << "\t" << road.getTroughput();
+            }
+            out << std::endl;
         }
 
         drawProgress(((float) step)/(settings.end_T*1./settings.DT),
@@ -70,6 +90,8 @@ void Simulation::run()
 
     std::cout<<"\n\n";
     std::cout<<"==========================================================\n";
+
+    out.close();
 }
 
 void Simulation::drawProgress(double percent, double oldpercent, unsigned int l)

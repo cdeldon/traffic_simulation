@@ -24,7 +24,7 @@ Road::Road(Simulation const * const s)
 
 
 Road::Road(double speed_limit, double time_headway, double space_headway, Simulation const * const s)
-    : speed_limit(speed_limit), time_headway(time_headway), space_headway(space_headway), simulation(s)
+    : speed_limit(speed_limit), time_headway(time_headway), space_headway(space_headway), simulation(s), throughput(0)
 {
 }
 
@@ -34,7 +34,7 @@ Road::Road(const Road & other)
 }
 
 Road::Road(const Road & other, Simulation const * const s)
-    : speed_limit(other.speed_limit), time_headway(other.time_headway), space_headway(other.space_headway), simulation(s)
+    : speed_limit(other.speed_limit), time_headway(other.time_headway), space_headway(other.space_headway), simulation(s), throughput(0)
 {
     cars.resize(other.cars.size());
     for (unsigned int i = 0; i < other.cars.size(); ++i) {
@@ -108,6 +108,39 @@ void Road::writePositions(std::string filename) const
     out.close();
 }
 
+
+std::vector<double> Road::getPositions() const
+{
+    std::vector<double> result;
+    result.resize(cars.size());
+    for (unsigned int i = 0; i < result.size(); ++i)
+        result[i] = cars[i]->getPosition();
+    return result;
+}
+
+std::vector<double> Road::getVelocities() const
+{
+    std::vector<double> result;
+    result.resize(cars.size());
+    for (unsigned int i = 0;  i < result.size(); ++i)
+        result[i] = cars[i]->getVelocity();
+    return result;
+}
+
+unsigned int Road::getTroughput() const
+{
+    return this->throughput;
+}
+
+void Road::resetTroughput()
+{
+    this->throughput = 0;
+}
+
+void Road::incThroughput()
+{
+    this->throughput++;
+}
 
 double Road::getLength() const
 {

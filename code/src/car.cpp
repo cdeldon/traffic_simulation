@@ -9,12 +9,12 @@
 #include <cmath>
 
 
-Car::Car(const position pos, const Road* const r)
+Car::Car(const position pos, Road* const r)
     : p(pos), v(0), road(r)
 {
 }
 
-Car::Car(const position pos, const velocity vel, const Road* const r)
+Car::Car(const position pos, const velocity vel, Road* const r)
     : p(pos), v(vel), road(r)
 {
 }
@@ -24,7 +24,7 @@ Car::Car( const Car &other)
 {
 }
 
-Car::Car(const Car &other, const Road* const r)
+Car::Car(const Car &other, Road* const r)
     : p(other.p), v(other.v), road(r)
 {
 }
@@ -71,7 +71,11 @@ void Car::update_postion(const double dt)
     this->p += this->v * settings->DT;
 
     // periodic boundary
-    this->p -= (this->p > road->getLength())? road->getLength() : 0;
+    if (this->p > road->getLength())
+    {
+        this->p -= road->getLength();
+        this->road->incThroughput();
+    }
 
 }
 

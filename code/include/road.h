@@ -31,6 +31,12 @@ class Road
 
         void writePositions(std::string filename) const;
 
+        std::vector<double> getPositions() const;
+        std::vector<double> getVelocities() const;
+        unsigned int getTroughput() const;
+        void incThroughput();
+        void resetTroughput();
+
 		double getLength() const;
 
 		void addObstacle(const Obstacle &);
@@ -63,6 +69,7 @@ class Road
 		std::vector<Car *> cars;
 
 		double length;
+        unsigned int throughput;
 
         const Simulation * const simulation;
 

@@ -24,6 +24,7 @@ private:
     double time;
 
     double car_length;
+    std::string fname;
 };
 
 #endif  // TRAFFIC_SIMULATION_SIMULATION_H

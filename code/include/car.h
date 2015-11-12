@@ -24,10 +24,10 @@ class Car
         typedef double length;
 
 
-        Car(const position, const Road* const);
-        Car(const position, const velocity, const Road* const);
+        Car(const position, Road* const);
+        Car(const position, const velocity, Road* const);
         Car(const Car & );
-        Car(const Car &, const Road * const);
+        Car(const Car &, Road * const);
 
         position getPosition() const { return p; }
         velocity getVelocity() const { return v; }
@@ -45,7 +45,7 @@ class Car
         velocity v;
         Car * next_car;
         Car * prev_car;
-        const Road * const road;
+        Road * const road;
 };
 
 #endif //TRAFFIC_SIMULATION_CAR_H
