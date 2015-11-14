@@ -208,6 +208,18 @@ double Road::spaceHeadway(double x) const
     return result;
 }
 
+double Road::nextRedLight(double x) const
+{
+    double result = INF;
+    for (unsigned int i = 0; i < traffic_lights.size(); ++i)
+    {
+        const TrafficLight & l = traffic_lights[i];
+        if (l.pos>x && l.isRed(simulation->getTime()))
+            result = std::min(result, l.pos);
+    }
+    return result;
+}
+
 int Road::find(const Car * c) const
 {
     for (unsigned int i = 0; i < cars.size(); ++i)
@@ -224,6 +236,8 @@ void Road::update(const double dt)
         cars[id]->update_postion(dt);
     }
 
+    /*
     //sorting - required for plotting?
     std::sort(cars.begin(), cars.end(), &Car::comp);
+    */
 }

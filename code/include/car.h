@@ -31,7 +31,7 @@ class Car
 
         position getPosition() const { return p; }
         velocity getVelocity() const { return v; }
-        acceleration getAcceleration() const;
+        acceleration getAcceleration(const double dt, bool & stop_light) const;
 
         std::string toString() const;
 

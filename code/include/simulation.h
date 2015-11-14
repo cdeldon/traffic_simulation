@@ -25,6 +25,9 @@ private:
 
     double car_length;
     std::string fname;
+
+public:
+    double getTime() const { return time; }
 };
 
 #endif  // TRAFFIC_SIMULATION_SIMULATION_H

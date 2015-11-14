@@ -60,7 +60,7 @@ void Simulation::run()
     {
         // if we must print the simulation
         ++step;
-        if(step % settings.output_freq == 1)
+        if(settings.output_freq == 1 || step % settings.output_freq == 1)
         {
             ++printStep;
             out << t << "\t\t";
@@ -86,6 +86,7 @@ void Simulation::run()
 
         // delegate the update of the car position to the road
         road.update(settings.DT);
+        time += settings.DT;
     }
 
     std::cout<<"\n\n";

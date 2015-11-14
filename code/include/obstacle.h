@@ -27,18 +27,19 @@ struct Obstacle
 struct TrafficLight
 {
     double pos;
-
     double period;
-    double duty_cycle;  // proportion of green time
+    double duty_cycle;    // proportion of green time
+    double initial_delay; // time before the light becomes active (green until then)
 
-    TrafficLight(double pos, double period, double duty_cycle = 0.5)
-        : pos(pos), period(period), duty_cycle(duty_cycle) {}
+    TrafficLight(double pos, double period, double duty_cycle = 0.5, double delay = 0.0)
+        : pos(pos), period(period), duty_cycle(duty_cycle), initial_delay(delay) {}
     TrafficLight()
-        : pos(0), period(1), duty_cycle(1) {}
+        : pos(0), period(1), duty_cycle(1), initial_delay(0) {}
 
-    bool isRed(double t)
+    bool isRed(double t) const
     {
-        return fmod(t, period) / period >= duty_cycle;
+        if (t < initial_delay) return false;
+        return fmod(t-initial_delay, period) / period >= duty_cycle;
     }
 };
 

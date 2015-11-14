@@ -29,28 +29,52 @@ Car::Car(const Car &other, Road* const r)
 {
 }
 
-Car::acceleration Car::getAcceleration() const
+
+// The ODE's right hand side should go here (not complete yet)
+Car::acceleration Car::getAcceleration(const double dt, bool & stop_light) const
 {
-    // The ODE's right hand side should go here (not complete yet)
     Settings const * const settings = road->getSimulation()->getSettings();
 
     // exponent in ODE
     const double delta = 4.f;
 
+    //velocity difference
     const double & deltaV = this->v  -  this->next_car->v;
 
-    const double & s_star = road -> spaceHeadway(this->p)
+    //desired gap to leading vehicle
+    double s_star = road -> spaceHeadway(this->p)
                     + std::max(0. , this->v * road->timeHeadway(this->p) +
                                    (this->v * deltaV)/(2*std::sqrt(settings->a_max * settings->d_max)));
 
+    // current gap
     double s_alpha = this->next_car->p - this->p;
     if (s_alpha < 0)                // deal with periodic boundary condition
         s_alpha += road->getLength();
     s_alpha -= settings->car_size;
 
+    double gap_term = std::pow(s_star / s_alpha, 2.);
+
+    // speed limit
     double limit_term = std::pow(v / road->speedLimit(p), delta);
 
-    return settings->a_max * (1. - limit_term - std::pow(s_star/s_alpha, 2.));
+
+    // traffic light
+    double light_decel = -INF;
+    std::vector<TrafficLight> l = road->getTrafficLights();
+    for (unsigned int i = 0; i < l.size(); ++i)
+    {
+        if (l[i].pos < this->p || !l[i].isRed(this->road->getSimulation()->getTime()))
+            continue;
+
+        //compute required deceleration
+        double d = std::abs(v)*v / (l[i].pos - p) / 2;
+        if (d<0.5*settings->d_max || d>2 * settings->d_max)
+            continue;
+        light_decel = std::max(light_decel, d);
+    }
+    
+
+    return std::min(settings->a_max * (1. - limit_term - gap_term), -light_decel);
 }
 
 std::string Car::toString() const
@@ -68,9 +92,30 @@ void Car::update_postion(const double dt)
 {
     Settings const * const settings = road->getSimulation()->getSettings();
 
-    // update the car position with a symplectic integration
-    this->v += getAcceleration() * settings->DT;
-    this->p += this->v * settings->DT;
+    // update the car position
+    bool sl(0);
+    double a = getAcceleration(dt, sl);
+
+
+    bool halt = 0;
+    std::vector<TrafficLight> l = road->getTrafficLights();
+    for (unsigned int i = 0; i < l.size(); ++i)
+    {
+        if (l[i].isRed(road->getSimulation()->getTime()) && abs(v) < 3 && l[i].pos - 1 < this->p  && l[i].pos > this->p)
+        {
+            this->v = 0;
+            halt = true;
+            break;
+        }
+    }
+    if (!halt) {
+        double move = this->v * settings->DT + 0.5*a*settings->DT * settings->DT;
+
+        this->v += a * settings->DT;
+        this->p += move;
+        //this->p += this->v * settings->DT;
+    }
+
 
     // periodic boundary
     if (this->p > road->getLength())

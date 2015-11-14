@@ -18,6 +18,24 @@ extern Simulation * active_simulation;
 
 class Road
 {
+    private:
+        void reIndex() const;
+
+        std::vector<Obstacle> obstacles;
+        std::vector<TrafficLight> traffic_lights;
+        // TODO Keep this as values not as pointers
+        std::vector<Car *> cars;
+
+        double length;
+        unsigned int throughput;
+
+        const Simulation * const simulation;
+
+        // General (default) values. Used when no obstacle is present.
+        double speed_limit;
+        double time_headway;
+        double space_headway;
+
     public:
         Road(Simulation const * const s = active_simulation);
         Road(const Road &);
@@ -48,6 +66,8 @@ class Road
 		double speedLimit(double x) const;
 		double timeHeadway(double x) const;
         double spaceHeadway(double x) const;
+        double nextRedLight(double x) const;
+        std::vector<TrafficLight> getTrafficLights() const { return traffic_lights; }
 
         int find(const Car *) const;
 
@@ -60,23 +80,7 @@ class Road
 
         void update(const double dt);
 
-    private:
-        void reIndex() const;
 
-		std::vector<Obstacle> obstacles;
-        std::vector<TrafficLight> traffic_lights;
-        // TODO Keep this as values not as pointers
-		std::vector<Car *> cars;
-
-		double length;
-        unsigned int throughput;
-
-        const Simulation * const simulation;
-
-        // General (default) values. Used when no obstacle is present.
-		double speed_limit;
-		double time_headway;
-        double space_headway;
 
 };
 

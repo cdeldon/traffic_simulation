@@ -105,7 +105,8 @@ void Settings::extractString(std::string line, std::string feature, std::string 
 
 void Settings::extractObstacle(const std::string & str)
 {
-    if (str.find("OBSTACLE") == std::string::npos)
+    
+    if (str.find("OBSTACLE") != 0)
         return;
     Obstacle o;
     std::stringstream ss;
@@ -116,12 +117,12 @@ void Settings::extractObstacle(const std::string & str)
 
 void Settings::extractLight(const std::string & str)
 {
-    if (str.find("LIGHT") == std::string::npos)
+    if (str.find("LIGHT") != 0)
         return;
     TrafficLight l;
     std::stringstream ss;
     ss << str.substr(5); // cut off "LIGHT"
-    ss >> l.pos >> l.period >> l.duty_cycle;
+    ss >> l.pos >> l.period >> l.duty_cycle >> l.initial_delay;
     traffic_lights.push_back(l);
 }
 
