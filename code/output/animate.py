@@ -16,20 +16,23 @@ vv = data[:, n+1:-2]
 throughput = data[:,-1]
 y = np.zeros(np.size(xx[0,:]))
 
+xlim_min = -1;
+xlim_max = np.max(xx[0,0] + xx[0,-1]);
+
 
 # First set up the figure, the axis, and the plot element we want to animate
 fig = plt.figure()
 ax = plt.axes(xlim=(-1, 1001), ylim=(-1, 1))
 scat = ax.scatter(xx[0,:],y)
 ax.hold(False)
-ax.set_xlim([-1,1001])
+ax.set_xlim([xlim_min,xlim_max])
 ax.set_ylim([-1,1])
 old_data = xx[0,:];
 
 # initialization function: plot the background of each frame
 def init():
     ax.hold(False)
-    ax.set_xlim([-1,1001])
+    ax.set_xlim([xlim_min,xlim_max])
     ax.set_ylim([-1,1])
     return ax,
 
@@ -41,7 +44,7 @@ def animate(i):
     ax.hold(True)
     scat = ax.scatter(x[0],0, color='r',s=100)
     ax.hold(False)
-    ax.set_xlim([-1,1001])
+    ax.set_xlim([xlim_min,xlim_max])
     ax.set_ylim([-1,1])
     return scat,
 
