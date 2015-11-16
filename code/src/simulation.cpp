@@ -86,6 +86,34 @@ void Simulation::run()
 
         // delegate the update of the car position to the road
         road.update(settings.DT);
+
+        // check for crashes
+        int crash = -1;
+        std::vector<double> cars = road.getPositions();
+        for (unsigned int i = 1; i < cars.size(); ++i)
+            if (std::fmod(cars[i] - cars[i - 1] + settings.road_length, settings.road_length) < settings.car_size)
+                crash = cars[i];
+        if (std::fmod(cars[0] - cars[cars.size() - 1] + settings.road_length, settings.road_length) < settings.car_size)
+            crash = cars[0];
+        if (crash != -1) {
+            std::cout << "Crash at position " << crash << " and time t=" << time << ". Aborting." << std::endl;
+            if (settings.output_positions) {
+                std::vector<double> p = road.getPositions();
+                for (unsigned int i = 0; i < p.size(); ++i)
+                    out << p[i] << "\t";
+            }
+            if (settings.output_velocities) {
+                out << "\t";
+                std::vector<double> v = road.getVelocities();
+                for (unsigned int i = 0; i < v.size(); ++i)
+                    out << v[i] << "\t";
+            }
+            if (settings.output_positions) {
+                out << "\t" << road.getTroughput();
+            }
+            out << std::endl;
+            return;
+        }
         time += settings.DT;
     }
 
