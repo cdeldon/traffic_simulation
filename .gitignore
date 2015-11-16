@@ -44,6 +44,8 @@ Thumbs.db
 *[bB]uild*
 *[dD]ebug*
 
+*.lnk
+
 
 # CLION #
 #########
