@@ -15,6 +15,7 @@ const Settings Settings::predefined = Settings();
 Settings::Settings()
     : n_cars(100),
       road_length(1000),
+      filling(1),
       v_desired(30),
       d_desired(2),
       a_max(1),
@@ -35,6 +36,7 @@ Settings::Settings( const unsigned int n, const double m, const double v, const 
                     const double dec, const double s, const double dt , const double T)
         : n_cars(n),
           road_length(m),
+          filling(1),
           v_desired(v),
           d_desired(dist),
           a_max(a),
@@ -56,6 +58,7 @@ std::string Settings::toString() const
     std::string res = std::string("==========================================================\nSimulation settings:\n") +
            "\nID = \"" + ID + "\""
            "\nInitial number of cars:\t" + to_string(n_cars) + "\t[cars]" +
+           "\nRoad filling:\t" + to_string(filling) +"\t[percent]" +
            "\nStreet length:\t\t" + to_string(road_length) + "\t[m]" +
            "\nDesired Velocity: \t" + to_string(v_desired) + "\t[m/s]" +
            "\nDesired Distance: \t" + to_string(d_desired) + "\t[m]" +
@@ -139,6 +142,7 @@ void Settings::readSettings( const char *path )
         {
             extractFeature(line, "N_CARS", n_cars);
             extractFeature(line, "ROAD_LENGTH", road_length);
+            extractFeature(line, "FILLING", filling);
             extractFeature(line, "VMAX", v_desired);
             extractFeature(line, "MIN_DIST", d_desired);
             extractFeature(line, "TIME_HEAD", t_desired);

@@ -14,6 +14,8 @@ struct Settings
     unsigned int n_cars;
     double road_length;
 
+    double filling;
+
     double v_desired;
     double d_desired;
     double t_desired;

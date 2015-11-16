@@ -77,35 +77,14 @@ void Road::populate(const std::vector<Car::position> & pos)
     reIndex();        
 }
 
-void Road::populate(unsigned int n)
+void Road::populate(unsigned int n, float filling)
 {
     cars.clear(); //TODO: MEMORY LEAK!!!!!!
     cars.resize(n);
     for (unsigned int i = 0; i < n; ++i) {
-        cars[i] = new Car(length/n * i, this);
+        cars[i] = new Car(length/n*filling * i, this);
     }
     reIndex();
-}
-
-
-void Road::writePositions(std::string filename) const
-{
-    std::ofstream out(filename.c_str());
-
-    out << std::setprecision(5);
-	for (unsigned int i = 0; i < cars.size(); ++i)
-    {
-		out << cars[i]->toString() << " \t ";
-    }
-    out << std::endl;
-
-    for (unsigned int i = 0; i < cars.size(); ++i)
-    {
-        out << cars[i]->getVelocity() << " \t ";
-    }
-
-    out << std::endl;
-    out.close();
 }
 
 
