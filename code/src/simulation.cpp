@@ -97,7 +97,9 @@ void Simulation::run()
         if (std::fmod(cars[0] - cars[cars.size() - 1] + settings.road_length, settings.road_length) < settings.car_size)
             crash = cars[0];
         if (crash != -1) {
-            std::cout << "Crash at position " << crash << " and time t=" << time << ". Aborting." << std::endl;
+            std::cout << std::endl << "Crash at position " << crash << " and time t=" << time << ". Aborting." << std::endl;
+#if 1
+            out << t << "\t\t";
             if (settings.output_positions) {
                 std::vector<double> p = road.getPositions();
                 for (unsigned int i = 0; i < p.size(); ++i)
@@ -113,6 +115,7 @@ void Simulation::run()
                 out << "\t" << road.getTroughput();
             }
             out << std::endl;
+#endif
             return;
         }
         time += settings.DT;
