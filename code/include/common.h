@@ -7,7 +7,7 @@
 
 #include <hack.h>
 
-#define INF (2<<30)
+#define INF (2<<25)
 
 class Simulation;
 

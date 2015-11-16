@@ -1,0 +1,27 @@
+# Hey, we can put any comment we like in here, and it will be ignored!
+
+N_CARS    = 1000
+ROAD_LENGTH = 20000
+VMAX      = 15
+MIN_DIST  = 2
+TIME_HEAD = 1.5
+AMAX      = 0.6
+DMAX      = 20
+CAR_SIZE  = 5
+DT        = 0.125
+END_TIME  = 2000
+
+
+# Output format
+ID = obstacle_1000_1300_road_20000_cars_1000
+POSITIONS = 1
+VELOCITIES = 1
+OUT_FREQ = 16
+THROUGHPUT = 1
+
+
+#OBSTACLE start end speed time space
+OBSTACLE 1000 1300 10 2.75 3
+
+#LIGHT pos period duty_cycle delay
+#LIGHT 950 300 0.5 3000
