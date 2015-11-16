@@ -24,16 +24,23 @@ Reworking our simulation in order to account for arbitrary influx currently seem
 
 ### Stability of free road traffic
 As mentioned, the few experiments that have been performed so far did not show a decrease in stability by an obstacle. However, we *are able* to produce unstable traffic on a **free** road.
+Here is a plot of such an instability.
 
-[ ] TODO: add image
+![Waves on free road](/doc/img/free_waves.png)
 
+Note how the wavelength remains constant for the entire simulation run. Also note that the waves run in direction opposite to the traffic flow.
 
 ### Traffic light
 As it was our original plan, we made some changes to the IDM equation to make it fit for traffic lights. Doing so was surprisingly complicated, as a light is modeled by a repulsive potential, yet we want the first car to stop exactly in front of it, and *stay there*. We also want  drivers to decide to keep going if a light suddenly goes *red* (read: *yellow)* just in front of them, or whether they can comfortably slow down. We had major troubles with numerical stability due to the point like nature of the traffic light: the cars would oscillate in front of the light, at some point pass the line ever so slightly, and then drive off. This has been solved by 'clamping' the car in front of the light.
 
-
 ## Research questions
-As planned we will continue to study the effects of traffic lights on the flow.
+As planned we will continue to study the effects of traffic lights on the flow. 
+
+* Can we create similar density waves as above for vehicle densities that would normally be stable?
+* Can the light also be stabilising?
+* What parameters influence these waves?
+
+If we fail to find any interesting effects related to the traffic light, we can still study the density waves that appear on the free road (see above), e.g. find how the wavelength depends on parameters such as the acceleration.
 
 
 ## References
