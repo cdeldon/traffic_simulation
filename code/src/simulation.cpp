@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <cmath>
 
 Simulation::Simulation()
     : time(0), road(this), fname(outDir + "cars" + ".dat")
@@ -130,12 +131,12 @@ void Simulation::drawProgress(double percent, double oldpercent, unsigned int l)
     std::string New;
 
     for (unsigned int i = 0; i<l; ++i) {
-        if(i < unsigned int(l * percent))
+        if(i < (unsigned int)(l * percent))
             New += "#";
         else {
             New += " ";
         }
-        if (i < unsigned int(l * oldpercent))
+        if (i < (unsigned int)(l * oldpercent))
             Old += "#";
         else {
             Old += " ";
