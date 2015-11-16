@@ -35,7 +35,7 @@ void Simulation::applySettingsChange()
     road.setSpaceHeadway(settings.d_desired);
     road.setTimeHeadway(settings.t_desired);
     road.setLength(settings.road_length);
-    road.populate(settings.n_cars);
+    road.populate(settings.n_cars, settings.filling);
 
     road.clearObstacles();
     for (unsigned int i = 0; i < settings.obstacles.size(); ++i)
