@@ -1,4 +1,4 @@
-# Hey, we can put any comment we like in here, and it will be ignored!
+# Example showing of a traffic light
 
 N_CARS    = 100
 ROAD_LENGTH = 20000
@@ -13,7 +13,7 @@ END_TIME  = 4000
 
 
 # Output format
-ID = test
+ID = light_test
 POSITIONS = 1
 VELOCITIES = 1
 OUT_FREQ = 16
