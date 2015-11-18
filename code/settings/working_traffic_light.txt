@@ -1,12 +1,12 @@
 # Example showing of a traffic light
 
-N_CARS    = 100
+N_CARS    = 800
 ROAD_LENGTH = 20000
 VMAX      = 15
 MIN_DIST  = 2
 TIME_HEAD = 1.5
 AMAX      = 0.6
-DMAX      = 10
+DMAX      = 1.5
 CAR_SIZE  = 5
 DT        = 0.125
 END_TIME  = 4000
@@ -21,7 +21,7 @@ THROUGHPUT = 1
 
 
 #OBSTACLE start end speed time space
-#OBSTACLE 10000 10300 20 1.75 2
+OBSTACLE 15000 16000 10 1.75 2
 
 #LIGHT pos period duty_cycle delay
-LIGHT 15000 300 0.5 200
+LIGHT 13000 300 0.5 200
