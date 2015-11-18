@@ -9,6 +9,7 @@
 
 #include <simulation.h>
 #include <iostream>
+#include <random>
 
 extern Simulation * active_simulation;
 
@@ -69,20 +70,29 @@ void Road::reIndex() const
 
 void Road::populate(const std::vector<Car::position> & pos)
 {
+    const Settings *settings = getSimulation()->getSettings();
+    std::default_random_engine generator;
+    double variance = settings->road_length*settings->filling / (settings->n_cars+1);
+
+    std::normal_distribution<double> distribution(0.0,variance/10);
 	cars.clear();
 	cars.resize(pos.size());
 	for (unsigned int i = 0; i < pos.size(); ++i)
-		cars[i] = new Car(pos[i], this);
+		cars[i] = new Car(pos[i] + distribution(generator), this);
 
     reIndex();        
 }
 
 void Road::populate(unsigned int n, float filling)
 {
+    const Settings *settings = getSimulation()->getSettings();
+    std::default_random_engine generator;
+    double variance = settings->road_length*settings->filling / (settings->n_cars+1);
+    std::normal_distribution<double> distribution(0.0,variance/10);
     cars.clear(); //TODO: MEMORY LEAK!!!!!!
     cars.resize(n);
     for (unsigned int i = 0; i < n; ++i) {
-        cars[i] = new Car(length/n*filling * i, this);
+        cars[i] = new Car(length/n*filling*i + clip(distribution(generator),-variance,variance), this);
     }
     reIndex();
 }

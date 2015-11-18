@@ -22,6 +22,12 @@ std::string to_string( const T &n )
     return ost.str();
 }
 
+template <typename T>
+T clip(const T& a, const T& lower, const T& upper)
+{
+    return std::max(lower, std::min(upper,a));
+}
+
 //#endif // defined( __MINGW32__) || defined(_MSC_VER)
 
 #endif //TRAFFIC_SIMULATION_HACK_H

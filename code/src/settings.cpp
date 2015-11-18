@@ -58,7 +58,7 @@ std::string Settings::toString() const
     std::string res = std::string("==========================================================\nSimulation settings:\n") +
            "\nID = \"" + ID + "\""
            "\nInitial number of cars:\t" + to_string(n_cars) + "\t[cars]" +
-           "\nRoad filling:\t" + to_string(filling) +"\t[percent]" +
+           "\nRoad filling:\t\t" + to_string(filling) +"\t[percent]" +
            "\nStreet length:\t\t" + to_string(road_length) + "\t[m]" +
            "\nDesired Velocity: \t" + to_string(v_desired) + "\t[m/s]" +
            "\nDesired Distance: \t" + to_string(d_desired) + "\t[m]" +
