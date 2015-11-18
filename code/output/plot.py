@@ -18,7 +18,10 @@ plt.title("Positions")
 plt.xlabel("time")
 plt.ylabel("position")
 plt.plot(tt,xx, "rx")
+ax = plt.gca()
+ax.set_ylim([0,numpy.max(numpy.max(xx))])
 plt.show()
+
 
 
 
@@ -46,6 +49,8 @@ plt.xlabel("time")
 plt.ylabel("position")
 plt.pcolormesh(tt_2d,xx, vv)
 plt.colorbar()
+ax = plt.gca()
+ax.set_ylim([0,numpy.max(numpy.max(xx))])
 plt.show()
 
 
