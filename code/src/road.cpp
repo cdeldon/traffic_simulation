@@ -77,14 +77,17 @@ void Road::populate(const std::vector<Car::position> & pos)
     std::normal_distribution<double> distribution(0.0,variance/10);
 	cars.clear();
 	cars.resize(pos.size());
+	
 	for (unsigned int i = 0; i < pos.size(); ++i)
+	{
 		cars[i] = new Car(pos[i] + distribution(generator), this);
+		cars[i] -> setVelocity(std::abs(distribution(generator))/10);
+	}
 
     reIndex();        
 }
 
 void Road::populate(unsigned int n, float filling)
-{
     const Settings *settings = getSimulation()->getSettings();
     std::default_random_engine generator;
     double variance = settings->road_length*settings->filling / (settings->n_cars+1);
@@ -93,6 +96,7 @@ void Road::populate(unsigned int n, float filling)
     cars.resize(n);
     for (unsigned int i = 0; i < n; ++i) {
         cars[i] = new Car(length/n*filling*i + clip(distribution(generator),-variance,variance), this);
+        cars[i] -> setVelocity(std::abs(distribution(generator))/10);
     }
     reIndex();
 }
