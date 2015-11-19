@@ -88,6 +88,7 @@ void Road::populate(const std::vector<Car::position> & pos)
 }
 
 void Road::populate(unsigned int n, float filling)
+{
     const Settings *settings = getSimulation()->getSettings();
     std::default_random_engine generator;
     double variance = settings->road_length*settings->filling / (settings->n_cars+1);
