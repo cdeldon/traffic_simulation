@@ -87,7 +87,7 @@ void Road::populate(const std::vector<Car::position> & pos)
     reIndex();        
 }
 
-void Road::populate(unsigned int n, float filling)
+void Road::populate(unsigned int n, double filling)
 {
     const Settings *settings = getSimulation()->getSettings();
     std::default_random_engine generator;

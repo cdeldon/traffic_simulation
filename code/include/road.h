@@ -45,7 +45,7 @@ class Road
         ~Road();
 
         void populate(const std::vector<Car::position> &);
-        void populate(unsigned int n, float filling = 1.f);
+        void populate(unsigned int n, double filling = 1.f);
 
         std::vector<double> getPositions() const;
         std::vector<double> getVelocities() const;

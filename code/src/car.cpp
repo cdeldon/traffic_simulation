@@ -52,8 +52,10 @@ Car::acceleration Car::getAcceleration(const double dt, bool & stop_light) const
         s_alpha += road->getLength();
     s_alpha -= settings->car_size;
 
-    double gap_term = std::pow(s_star / s_alpha, 2.);
-    gap_term = gap_term * (0.2 + 0.8*gap_term);
+
+    double gamma = settings->gamma;
+    double gap_term = std::pow(s_star / s_alpha, gamma);
+    //gap_term = gap_term * (0.2 + 0.8*gap_term);
 
     // speed limit
     double limit_term = std::pow(v / road->speedLimit(p), delta);

@@ -89,7 +89,7 @@ void Simulation::run()
         road.update(settings.DT);
 
         // check for crashes
-        int crash = -1;
+        double crash = -1;
         std::vector<double> cars = road.getPositions();
         for (unsigned int i = 1; i < cars.size(); ++i)
             if (std::fmod(cars[i] - cars[i - 1] + settings.road_length, settings.road_length) < settings.car_size)

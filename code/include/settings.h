@@ -25,6 +25,7 @@ struct Settings
 
     double DT;
     double end_T;
+    double gamma;
 
 
     //TODO output settings and flags
