@@ -1,0 +1,28 @@
+# Hey, we can put any comment we like in here, and it will be ignored!
+
+N_CARS    = 50
+ROAD_LENGTH = 1000
+FILLING = 1
+VMAX      = 15
+MIN_DIST  = 2
+TIME_HEAD = 1.5
+AMAX      = 0.6
+DMAX      = 2
+CAR_SIZE  = 5
+DT        = 0.1
+END_TIME  = 1000
+
+
+# Output format
+ID = roundabout
+POSITIONS = 1
+VELOCITIES = 1
+OUT_FREQ = 10
+THROUGHPUT = 1
+
+
+#OBSTACLE start end speed time space
+#OBSTACLE 10000 10300 20 1.75 2
+
+#LIGHT pos period duty_cycle delay
+#LIGHT 950 300 0.5 3000

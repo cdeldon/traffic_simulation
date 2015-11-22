@@ -14,38 +14,38 @@ tt = data[:,0]
 xx = data[:, 1:n+1]
 vv = data[:, n+1:-1]
 throughput = data[:,-1]
-y = np.zeros(np.size(xx[0,:]))
 
-xlim_min = -1;
-xlim_max = np.max(xx[0,0] + xx[0,-1]);
+
+road_length = np.max(xx);
 
 
 # First set up the figure, the axis, and the plot element we want to animate
 fig = plt.figure()
-ax = plt.axes(xlim=(-1, 1001), ylim=(-1, 1))
-scat = ax.scatter(xx[0,:],y)
+ax = plt.axes()
+plt.axis('equal')
+scat = ax.scatter(xx[0,:], np.zeros_like(xx[0,:]))
 ax.hold(False)
-ax.set_xlim([xlim_min,xlim_max])
-ax.set_ylim([-1,1])
 old_data = xx[0,:];
 
 # initialization function: plot the background of each frame
 def init():
     ax.hold(False)
-    ax.set_xlim([xlim_min,xlim_max])
-    ax.set_ylim([-1,1])
+    ax.set_xlim([-road_length/2,road_length/2])
+    ax.set_ylim([-road_length/2,road_length/2])
     return ax,
 
 # animation function.  This is called sequentially
 def animate(i):
     print('frame: ', i)
-    x = xx[i,:]
+    x = road_length/(2*np.pi)*np.cos(2*np.pi*xx[i,:]/road_length)
+    y = road_length/(2*np.pi)*np.sin(2*np.pi*xx[i,:]/road_length)
     scat = ax.scatter(x,y)
     ax.hold(True)
-    scat = ax.scatter(x[0],0, color='r',s=100)
+    scat = ax.scatter(x[0],y[0], color='r',s=100, label="t={}".format(tt[i]))
     ax.hold(False)
-    ax.set_xlim([xlim_min,xlim_max])
-    ax.set_ylim([-1,1])
+    ax.set_xlim([-road_length/2,road_length/2])
+    ax.set_ylim([-road_length/2,road_length/2])
+    ax.legend(loc = "best")
     return scat,
 
 # call the animator.  blit=True means only re-draw the parts that have changed.
