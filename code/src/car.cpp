@@ -104,7 +104,7 @@ void Car::update_postion(const double dt)
     std::vector<TrafficLight> l = road->getTrafficLights();
     for (unsigned int i = 0; i < l.size(); ++i)
     {
-        if (l[i].isRed(road->getSimulation()->getTime()) && abs(v) < 3 && l[i].pos - 1 < this->p  && l[i].pos > this->p)
+        if (l[i].isRed(road->getSimulation()->getTime()) && std::abs(v) < 3 && l[i].pos - 1 < this->p  && l[i].pos > this->p)
         {
             this->v = 0;
             halt = true;
