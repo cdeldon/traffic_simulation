@@ -17,7 +17,7 @@ int main( int argc, char **argv )
     }
     else if ( argc == 2 )
     {
-		std::cout << "Loaded settings from argv[1]:" << std::endl;
+		std::cout << "Loading settings from argv[1]..." << std::endl;
         active_simulation->readSettings(argv[1]);
     }
 
@@ -27,5 +27,5 @@ int main( int argc, char **argv )
 
     std::cout << "Execution completed\n";
 
-    return 1;
+    return 0;
 }
