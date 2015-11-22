@@ -6,6 +6,7 @@
 *.exe
 *.o
 *.so
+*.pyc
 
 # Packages #
 ############
@@ -46,6 +47,8 @@ Thumbs.db
 
 *.lnk
 
+code/settings/order_parameter*.txt
+code/measurements/paths.py
 
 # CLION #
 #########
