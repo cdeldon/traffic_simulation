@@ -48,6 +48,7 @@ Thumbs.db
 *.lnk
 
 code/settings/order_parameter*.txt
+code/settings/fourier_space*.txt
 code/measurements/paths.py
 
 # CLION #

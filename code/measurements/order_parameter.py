@@ -3,6 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 from paths import SETTINGS_PATH, OUTPUT_PATH, SIM_PATH, SIM_WD
+from common import parse_output
 
 SETTINGS_TEMPLATE = """
 N_CARS    = 50
@@ -14,7 +15,7 @@ AMAX      = 0.6
 DMAX      = 2
 CAR_SIZE  = 5
 DT        = 0.250
-END_TIME  = 20000
+END_TIME  = 30000
 
 
 # Output format
@@ -40,13 +41,7 @@ def compute_variances():
         check_call([SIM_PATH, SETTINGS_PATH+"/order_parameter.txt"], cwd = SIM_WD)
         
         # read output
-        data = np.loadtxt(OUTPUT_PATH+"/cars_order_parameter{}.dat".format(gamma))
-        n = (len(data[0])-1)//2
-        tt = data[:,0]
-        xx = data[:, 1:n+1]
-        vv = data[:, n+1:-2]
-        throughput = data[:,-1]
-        
+        n, tt, xx, vv, throughput = parse_output(OUTPUT_PATH+"/cars_order_parameter{}.dat".format(gamma))      
         
         variances[i] = np.var(vv[-1])
         
@@ -78,6 +73,6 @@ def make_plot():
     
     
 if __name__ == "__main__":
-    #compute_variances()
+    compute_variances()
     make_plot()
 
