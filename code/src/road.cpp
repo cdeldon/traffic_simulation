@@ -89,6 +89,9 @@ void Road::populate(const std::vector<Car::position> & pos)
 #endif
 
 	}
+	
+//	cars.back() -> setPosition(settings->road_length-8.f);
+//	cars.back() -> setVelocity(0.f);
 
     reIndex();        
 }
@@ -109,6 +112,10 @@ void Road::populate(unsigned int n, double filling)
         cars[i] = new Car(length / n*filling*i , this);
 #endif
     }
+    
+//    cars.back() -> setPosition(settings->road_length-8.f);
+//	cars.back() -> setVelocity(0.f);
+	
     reIndex();
 }
 
@@ -238,7 +245,11 @@ void Road::update(const double dt)
     for(unsigned int id = 0; id < cars.size(); ++ id)
     {
         cars[id]->update_postion(dt);
+        if(cars[id]->getVelocity() < 0)
+            cars[id]->setVelocity(0);
     }
+    
+//    cars.back() -> setVelocity(0.f);
 
     /*
     //sorting - required for plotting?

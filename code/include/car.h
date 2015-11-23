@@ -30,6 +30,7 @@ class Car
         Car(const Car &, Road * const);
 
         position getPosition() const { return p; }
+        void setPosition(double p_){this->p = p_;}
         velocity getVelocity() const { return v; }
         void setVelocity(velocity v_){this->v = v_;}
         acceleration getAcceleration(const double dt, bool & stop_light) const;
