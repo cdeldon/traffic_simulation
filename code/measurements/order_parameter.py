@@ -6,8 +6,8 @@ from paths import SETTINGS_PATH, OUTPUT_PATH, SIM_PATH, SIM_WD
 from common import parse_output
 
 SETTINGS_TEMPLATE = """
-N_CARS    = 50
-ROAD_LENGTH = 1000
+N_CARS    = 500
+ROAD_LENGTH = 10000
 VMAX      = 15
 MIN_DIST  = 2
 TIME_HEAD = 1.5
@@ -65,7 +65,7 @@ def make_plot():
     idx = np.where(np.logical_and(2.8 <= gammas, gammas <= 3) )
     a, b = np.polyfit(gammas[idx], np.sqrt(variances)[idx], 1)
     xx = np.linspace(2.,3.5, 2)
-    plt.plot(xx, a*xx+b, "g--", label="linear fit")
+    #plt.plot(xx, a*xx+b, "g--", label="linear fit")
     plt.grid(True)
     plt.legend(loc="best")
     plt.savefig("order_parameter.png")
@@ -74,6 +74,6 @@ def make_plot():
     
     
 if __name__ == "__main__":
-    compute_variances()
+    #○compute_variances()
     make_plot()
 
