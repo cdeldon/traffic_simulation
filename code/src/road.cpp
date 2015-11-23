@@ -17,6 +17,7 @@ extern Simulation * active_simulation;
 #define DEFAULT_TIMEHEADWAY (s->getSettings()->t_desired)
 #define DEFAULT_SPACEHEADWAY (s->getSettings()->d_desired)
 
+//#define RANDOMIZATION
 
 Road::Road(Simulation const * const s)
     : Road(DEFAULT_SPEEDLIMIT, DEFAULT_TIMEHEADWAY, DEFAULT_SPACEHEADWAY, s)
@@ -80,8 +81,13 @@ void Road::populate(const std::vector<Car::position> & pos)
 	
 	for (unsigned int i = 0; i < pos.size(); ++i)
 	{
-		cars[i] = new Car(pos[i] + distribution(generator), this);
-		cars[i] -> setVelocity(std::abs(distribution(generator))/10);
+#ifdef RANDOMIZATION
+        cars[i] = new Car(pos[i] + distribution(generator), this);
+        cars[i] -> setVelocity(std::abs(distribution(generator))/10);
+#else
+        cars[i] = new Car(pos[i], this);
+#endif
+
 	}
 
     reIndex();        
@@ -96,8 +102,12 @@ void Road::populate(unsigned int n, double filling)
     cars.clear(); //TODO: MEMORY LEAK!!!!!!
     cars.resize(n);
     for (unsigned int i = 0; i < n; ++i) {
+#ifdef RANDOMIZATION
         cars[i] = new Car(length/n*filling*i + clip(distribution(generator),-variance,variance), this);
         cars[i] -> setVelocity(std::abs(distribution(generator))/10);
+#else
+        cars[i] = new Car(length / n*filling*i , this);
+#endif
     }
     reIndex();
 }
