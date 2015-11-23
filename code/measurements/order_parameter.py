@@ -67,8 +67,9 @@ def make_plot():
     xx = np.linspace(2.,3.5, 2)
     plt.plot(xx, a*xx+b, "g--", label="linear fit")
     plt.grid(True)
-    plt.savefig("order_parameter.png")
     plt.legend(loc="best")
+    plt.savefig("order_parameter.png")
+    plt.savefig("order_parameter.pdf")
     plt.show()
     
     
