@@ -80,5 +80,5 @@ def make_fft_plot():
 
 
 if __name__ == "__main__":
-    create_grid()
+    #create_grid()
     make_fft_plot()

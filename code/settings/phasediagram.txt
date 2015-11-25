@@ -1,0 +1,20 @@
+
+ROAD_LENGTH = 1000
+VMAX      = 15
+MIN_DIST  = 2
+TIME_HEAD = 1.5
+AMAX      = 0.6
+DMAX      = 2
+CAR_SIZE  = 5
+DT        = 0.250
+END_TIME  = 30000
+
+
+# Output format
+POSITIONS = 1
+VELOCITIES = 1
+OUT_FREQ = 80
+THROUGHPUT = 1
+ID = phasediagram2.2572265625
+GAMMA = 2.2572265625
+N_CARS = 150.0

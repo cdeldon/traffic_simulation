@@ -6,8 +6,8 @@ from paths import SETTINGS_PATH, OUTPUT_PATH, SIM_PATH, SIM_WD
 from common import parse_output
 
 SETTINGS_TEMPLATE = """
-N_CARS    = 500
-ROAD_LENGTH = 10000
+N_CARS    = 50
+ROAD_LENGTH = 1000
 VMAX      = 15
 MIN_DIST  = 2
 TIME_HEAD = 1.5
@@ -26,15 +26,16 @@ THROUGHPUT = 1
 """
 
 
-def compute_variances():
-    gammas = np.linspace(2.0, 3.5, 101)
-    
+def compute_variances(N, save=True, settings = SETTINGS_TEMPLATE, gammas = None):
+    if gammas == None:    
+        gammas = np.linspace(1.5, 3.5, N)
+    N = len(gammas)
     variances = 0*gammas
     
     for i, gamma in enumerate(gammas):
         print "\n\nRunning sim for gamma = {0}".format(gamma)
         settings_file = open(SETTINGS_PATH + "/order_parameter.txt", "w")
-        settings_file.write(SETTINGS_TEMPLATE)
+        settings_file.write(settings)
         settings_file.write("ID = order_parameter{0}\nGAMMA = {0}".format(gamma))
         settings_file.close()
     
@@ -45,9 +46,9 @@ def compute_variances():
         
         variances[i] = np.var(vv[-1])
         
-        
-    np.save("variances", variances)
-    np.save("gammas", gammas)
+    if save:   
+        np.save("variances", variances)
+        np.save("gammas", gammas)
     return gammas, variances
 
 
@@ -74,6 +75,6 @@ def make_plot():
     
     
 if __name__ == "__main__":
-    #○compute_variances()
+    compute_variances(N=101)
     make_plot()
 
