@@ -1,7 +1,7 @@
 # TODO LIST
 - [ ] Implement flux sweep
 - [ ] and run it
-- [ ] sweep density in plots of order parameter
+- [x] sweep density in plots of order parameter
 - [ ] find nice settigs for traffic light and/or obstacles
 - [ ] sweep traffic light swithcing frequency, plot throughput
 
