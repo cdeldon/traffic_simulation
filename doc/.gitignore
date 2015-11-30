@@ -3,4 +3,6 @@ latex/*.log
 latex/*.gz
 latex/*.toc
 latex/*.out
+latex/*.blg
+latex/*.bbl
 latex/report.pdf
