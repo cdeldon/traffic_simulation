@@ -46,6 +46,17 @@ scat = ax.scatter(xx[0,:], np.zeros_like(xx[0,:]))
 ax.hold(False)
 old_data = xx[0,:];
 
+def drawProgressBar(percent, barLen = 50):
+    sys.stdout.write("\r")
+    progress = ""
+    for i in range(barLen):
+        if i < int(barLen * percent):
+            progress += "="
+        else:
+            progress += " "
+    sys.stdout.write("[ %s ] %.2f%%" % (progress, percent * 100))
+    sys.stdout.flush()
+
 def arc_patch(r1, r2, start, end, road_length,  axx=None, resolution=50, **kwargs):
     # make sure ax is not empty
     if axx is None:
@@ -73,7 +84,7 @@ def init():
 
 # animation function.  This is called sequentially
 def animate(i):
-    print('frame: ', i)
+    drawProgressBar(float(i)/tt[-1])
     x = road_length/(2*np.pi)*np.cos(2*np.pi*xx[i,:]/road_length)
     y = road_length/(2*np.pi)*np.sin(2*np.pi*xx[i,:]/road_length)
          
@@ -106,6 +117,8 @@ def animate(i):
     ax.hold(False)
     ax.set_xlim([-road_length/4,road_length/4])
     ax.set_ylim([-road_length/4,road_length/4])
+    plt.xlabel('x[m]')
+    plt.ylabel('y[m]')
     m, s = divmod(tt[i], 60)
     h, m = divmod(m, 60)
     
