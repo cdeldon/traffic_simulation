@@ -1,6 +1,7 @@
 from subprocess import check_call
 import numpy as np
 from matplotlib import pyplot as plt
+import matplotlib
 
 from paths import SETTINGS_PATH, OUTPUT_PATH, SIM_PATH, SIM_WD
 from common import parse_output
@@ -55,26 +56,28 @@ def compute_variances(N, save=True, settings = SETTINGS_TEMPLATE, gammas = None)
 def make_plot():
     variances = np.load("variances.npy")
     gammas = np.load("gammas.npy")
-    
-    
+
+    matplotlib.rcParams.update({'font.size': 11})
+    plt.figure(figsize=(4,3), dpi = 200)
     plt.plot(gammas, np.sqrt(variances), label="data")
-    plt.xlabel(r"gap potential exponent $\gamma$")
-    plt.ylabel(r"deviation of velocities $\sqrt{\langle v^2 \rangle}$ (m/s)")
+    plt.xlabel(r"interaction exponent $\gamma$")
+    plt.ylabel(r"std. dev. of velocities $\sqrt{\langle v^2 \rangle}$ (m/s)")
     plt.ylim((-1, np.sqrt(np.max(variances))+1))
     
     
-    idx = np.where(np.logical_and(2.8 <= gammas, gammas <= 3) )
+    idx = np.where(np.logical_and(2.8 <= gammas, gammas <= 2.97) )
     a, b = np.polyfit(gammas[idx], np.sqrt(variances)[idx], 1)
     xx = np.linspace(2.,3.5, 2)
-    #plt.plot(xx, a*xx+b, "g--", label="linear fit")
+    plt.plot(xx, a*xx+b, "g--", label="linear fit")
     plt.grid(True)
     plt.legend(loc="best")
+    plt.tight_layout()
     plt.savefig("order_parameter.png")
     plt.savefig("order_parameter.pdf")
     plt.show()
     
     
 if __name__ == "__main__":
-    compute_variances(N=101)
+    #compute_variances(N=101)
     make_plot()
 

@@ -1,7 +1,6 @@
 from subprocess import check_call
 import numpy as np
 from matplotlib import pyplot as plt
-import matplotlib
 
 from paths import SETTINGS_PATH, OUTPUT_PATH, SIM_PATH, SIM_WD
 from common import parse_output
@@ -73,24 +72,24 @@ def make_plot():
         densities = f["densities"]
         gamma_c = f["gamma_c"]
         
-
-    matplotlib.rcParams.update({'font.size': 16})
+    plt.figure(figsize = (4,3), dpi = 200)
     plt.plot(densities, gamma_c, linewidth = 3)
     plt.xlabel(r"vehicle density (km$^{-1})$")
-    plt.ylabel(r"critical exponent $\gamma$")
-    plt.ylim((1.5, 3.5))
+    plt.ylabel(r"critical exponent $\gamma_C$")
+    plt.ylim((1.5, 4.))
     plt.xlim((min(densities), max(densities)))
     plt.fill_between(densities, gamma_c, interpolate = True, alpha = 0.3)
     plt.grid(True)
-    plt.text(70, 2.7, "Unstable")
-    plt.text(22, 3.2, "Homogeneous")
+    plt.text(70, 2.2, "Unstable")
+    plt.text(22, 3.7, "Homogeneous")
+    plt.tight_layout()
     plt.savefig("phase_diagram.png")
     plt.savefig("phase_diagram.pdf")
 
-    #plt.show()
+    plt.show()
     
     
 if __name__ == "__main__":
-    run_sim()    
+    #run_sim()    
     make_plot()
 

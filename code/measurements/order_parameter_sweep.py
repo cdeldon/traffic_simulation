@@ -1,6 +1,7 @@
 from subprocess import check_call
 import numpy as np
 from matplotlib import pyplot as plt
+import matplotlib
 
 from paths import SETTINGS_PATH, OUTPUT_PATH, SIM_PATH, SIM_WD
 from common import parse_output
@@ -27,18 +28,27 @@ THROUGHPUT = 1
 
 exec SETTINGS_TEMPLATE
 
-def make_plot():
-    N_densities = 5
-    N_gammas = 51
-    densities = np.linspace(10, 100., N_densities)
+N_densities = 5
+N_gammas = 51
+densities = np.linspace(10, 100., N_densities)
+
+def run_sim():
+
     sims = np.zeros((N_densities,2, N_gammas))   
     for i,d in enumerate(densities):
         n_cars = ROAD_LENGTH * d * 0.001
         settings = SETTINGS_TEMPLATE + "N_CARS = {}\n".format(n_cars)
         gammas, variances = compute_variances(N_gammas, save = False, settings= settings)
         sims[i] = gammas, variances
-        plt.plot(gammas, np.sqrt(variances), label="{} 1/km".format(d))
+        
     np.save("sims", sims)
+
+def make_plot():
+    sims = np.load("sims.npy")
+    matplotlib.rcParams.update({'font.size': 16})
+    for i,d in enumerate(densities):
+        gammas, variances = sims[i]
+        plt.plot(gammas, np.sqrt(variances), label="{} 1/km".format(d))
     plt.xlabel(r"gap potential exponent $\gamma$")
     plt.ylabel(r"deviation of velocities $\sqrt{\langle v^2 \rangle}$ (m/s)")
     #plt.ylim((-1, np.sqrt(np.max(variances))+1))
@@ -51,5 +61,6 @@ def make_plot():
     
     
 if __name__ == "__main__":
+    #run_sim()
     make_plot()
 
