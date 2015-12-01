@@ -59,6 +59,7 @@ class Road
 		void clearObstacles();
 
 		void addTrafficLight(const TrafficLight &);
+
 		void clearTrafficLights();
 
 		double speedLimit(double x) const;

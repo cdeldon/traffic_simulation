@@ -1,6 +1,6 @@
 # Example showing of a traffic light
 
-N_CARS    = 800
+N_CARS    = 400
 ROAD_LENGTH = 20000
 VMAX      = 15
 MIN_DIST  = 2
@@ -16,12 +16,14 @@ END_TIME  = 4000
 ID = light_test
 POSITIONS = 1
 VELOCITIES = 1
-OUT_FREQ = 16
+OUT_FREQ = 32
+OUT_LI = 1
 THROUGHPUT = 1
 
 
 #OBSTACLE start end speed time space
-OBSTACLE 15000 16000 10 1.75 2
+#OBSTACLE 15000 16000 10 1.75 2
 
 #LIGHT pos period duty_cycle delay
-LIGHT 13000 300 0.5 200
+LIGHT 13000 100 0.5 100
+LIGHT 8000 100 0.8 100

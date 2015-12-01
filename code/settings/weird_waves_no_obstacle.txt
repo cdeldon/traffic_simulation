@@ -16,8 +16,9 @@ END_TIME  = 2000
 ID = test
 POSITIONS = 1
 VELOCITIES = 1
-OUT_FREQ = 16
+OUT_FREQ = 8
 THROUGHPUT = 1
+LUGHTS = 1
 
 
 #OBSTACLE start end speed time space

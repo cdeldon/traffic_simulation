@@ -33,6 +33,7 @@ struct Settings
     bool output_positions;
     bool output_velocities;
     bool output_throughput;
+    bool output_light;
     int output_freq;
 
     std::vector<Obstacle> obstacles;

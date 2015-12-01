@@ -1,7 +1,7 @@
 # Hey, we can put any comment we like in here, and it will be ignored!
 
-N_CARS    = 500
-ROAD_LENGTH = 10000
+N_CARS    = 50
+ROAD_LENGTH = 1000
 FILLING = 0.5
 VMAX      = 15
 MIN_DIST  = 2

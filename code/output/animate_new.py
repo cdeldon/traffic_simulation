@@ -9,6 +9,7 @@ if len(sys.argv)<=1:
     data = np.loadtxt("cars_test.dat")
 else :
     data = np.loadtxt(sys.argv[1])
+    dataLight = np.loadtxt(sys.argv[1] + "_lights.dat")
     if len(sys.argv) ==3:
         saveAnim = (sys.argv[2] == "save")
 
@@ -18,6 +19,10 @@ tt = data[:,0]
 xx = data[:, 1:n+1]
 vv = data[:, n+1:-1]
 throughput = data[:,-1]
+
+nLights = int(dataLight[0,0])
+xxLights = dataLight[:,1::2]
+onLights = dataLight[:,2::2]
 
 # traveled distance of car0;
 distanceX0 = 0
@@ -52,6 +57,16 @@ def animate(i):
     # calculate the time in minutes, hours and second
     
     scat = ax.scatter(x[0],y[0], color='r',s=100)
+    # add the traffic lights
+    if nLights>0:
+        xl = 1.1*road_length/(2*np.pi)*np.cos(2*np.pi*xxLights[i,:]/road_length)
+        yl = 1.1*road_length/(2*np.pi)*np.sin(2*np.pi*xxLights[i,:]/road_length)
+        for l in range(nLights):
+            if(onLights[i,l] == 1):
+                scat = ax.scatter(xl[l],yl[l], marker="s" ,color='r', s=50)
+            else:
+                scat = ax.scatter(xl[l],yl[l], marker="^", color='g', s=50)
+        
     ax.hold(False)
     ax.set_xlim([-road_length/4,road_length/4])
     ax.set_ylim([-road_length/4,road_length/4])
