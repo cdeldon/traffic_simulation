@@ -1,0 +1,20 @@
+
+ROAD_LENGTH = 1000
+VMAX      = 15
+MIN_DIST  = 2
+TIME_HEAD = 1.6
+AMAX      = 0.73
+DMAX      = 1.67
+CAR_SIZE  = 5
+DT        = 0.250
+END_TIME  = 3000
+GAMMA     = 3
+
+
+# Output format
+POSITIONS = 1
+VELOCITIES = 1
+OUT_FREQ = 100
+THROUGHPUT = 1
+ID = flux145
+N_CARS= 145

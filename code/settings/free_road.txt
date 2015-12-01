@@ -1,0 +1,19 @@
+
+N_CARS    = 50
+ROAD_LENGTH = 1000
+VMAX      = 15
+MIN_DIST  = 2
+TIME_HEAD = 1.5
+AMAX      = 0.6
+DMAX      = 2
+CAR_SIZE  = 5
+DT        = 0.125
+END_TIME  = 2000
+
+
+# Output format
+POSITIONS = 1
+VELOCITIES = 1
+OUT_FREQ = 8
+THROUGHPUT = 1
+ID = free_road
