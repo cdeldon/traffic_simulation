@@ -19,6 +19,10 @@ xx = data[:, 1:n+1]
 vv = data[:, n+1:-1]
 throughput = data[:,-1]
 
+# traveled distance of car0;
+distanceX0 = 0
+oldDistance = 0
+loops = 0
 
 road_length = np.max(xx);
 
@@ -34,8 +38,8 @@ old_data = xx[0,:];
 # initialization function: plot the background of each frame
 def init():
     ax.hold(False)
-    ax.set_xlim([-road_length/2,road_length/2])
-    ax.set_ylim([-road_length/2,road_length/2])
+    ax.set_xlim([-road_length/4,road_length/4])
+    ax.set_ylim([-road_length/4,road_length/4])
     return ax,
 
 # animation function.  This is called sequentially
@@ -45,11 +49,39 @@ def animate(i):
     y = road_length/(2*np.pi)*np.sin(2*np.pi*xx[i,:]/road_length)
     scat = ax.scatter(x,y)
     ax.hold(True)
-    scat = ax.scatter(x[0],y[0], color='r',s=100, label="t={}".format(tt[i]))
+    # calculate the time in minutes, hours and second
+    
+    scat = ax.scatter(x[0],y[0], color='r',s=100)
     ax.hold(False)
-    ax.set_xlim([-road_length/2,road_length/2])
-    ax.set_ylim([-road_length/2,road_length/2])
-    ax.legend(loc = "best")
+    ax.set_xlim([-road_length/4,road_length/4])
+    ax.set_ylim([-road_length/4,road_length/4])
+    m, s = divmod(tt[i], 60)
+    h, m = divmod(m, 60)
+    
+    ## ADD text informations
+    vskip = road_length/6 - road_length/7;
+    # time informations
+    ax.text(road_length/7,road_length/6, r"$Time:$ $%d:%02d:%02d$" % (h, m, s))
+        
+    # add velocity information of the red car
+    ax.text(road_length/7,road_length/6 - vskip,    r"$v:$      $%d [km/h]$" % int(vv[i,0]*3.6))
+    
+    global oldDistance
+    global distanceX0
+    global loops
+    
+    distanceX0 = xx[i,0] + loops*road_length;
+    if distanceX0 < oldDistance: #if the car completed a loop
+        loops += 1
+        distanceX0 += road_length
+        
+    oldDistance = distanceX0
+        
+    ax.text(road_length/7,road_length/6 - 1.7*vskip,    r"$d:$      $%d [m]$" % int(distanceX0))
+    
+    # add velocity information of the simulation
+    ax.text(road_length/7,road_length/6 -2.7*vskip, r"$avg_v:$ $%d [km/h]$" % int(np.mean(vv[i,:])*3.6))
+        
     return scat,
 
 # call the animator.  blit=True means only re-draw the parts that have changed.
