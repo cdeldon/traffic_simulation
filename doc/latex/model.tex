@@ -49,28 +49,31 @@ Note that the IDM does not model the finite reaction time of an actual human dri
 The road on which the vehicles travel is assumed to be single lane (no overtaking) and straight (constant speed limit). All drivers and vehicles are assumed to be identical.
 
 \subsection{Summary of the parameters}
-Here the reader may find an overview of the relevant quantities and symbols. The indicated values are those used in the presented simulations unless specified otherwise.
+In table \ref{tab:param} the reader may find an overview of all the parameters in the model. The indicated values are those used in the presented simulations unless specified otherwise.
+\begin{table}
+    \begin{center}
+        \begin{tabular}[pos]{p{0.5\textwidth} p{0.3\textwidth}}
+            \toprule
+            Parameter & Typical value\\
+            \midrule
+            global speed limit $v_0$ & \SI{15}{m/s} \\
+            maximum acceleration $a$ & \SI{0.6}{m/s^2} \\
+            maximum comfortable deceleration $b$ & \SI{1.1}{m/s^2} \\
+            minimum time headway $T$ & \SI{1.5}{s} \\
+            minimum jam distance $s_0$ & \SI{2}{m} \\
+            free road acceleration exponent $\delta$ & 4 \\
+            interaction exponent $\gamma$ & 2\\
+            car size $l_\alpha$ & \SI{5}{m} \\
+            number of cars $N$ & 50\\
+            length of road $L$ & \SI{1}{km} \\
+            time step $\Delta t$ & \SI{0.25}{s} \\
+            end time (duration of simulation) $t_\mathrm{end}$ &  \SI{30000}{s}\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    \caption{Overview of the parameters in the simulation.}
+    \label{tab:param}
+\end{table}
 
-\begin{center}
 
-\begin{tabular}[pos]{p{0.5\textwidth} p{0.3\textwidth}}
-    \toprule
-    Parameter & Typical value\\
-    \midrule
-    global speed limit $v_0$ & \SI{15}{m/s} \\
-    maximum acceleration $a$ & \SI{0.6}{m/s^2} \\
-    maximum comfortable deceleration $b$ & \SI{1.1}{m/s^2} \\
-    minimum time headway $T$ & \SI{1.5}{s} \\
-    minimum jam distance $s_0$ & \SI{2}{m} \\
-    free road acceleration exponent $\delta$ & 4 \\
-    interaction exponent $\gamma$ & 2\\
-    car size $l_\alpha$ & \SI{5}{m} \\
-    number of cars $N$ & 50\\
-    length of road $L$ & \SI{1}{km} \\
-    time step $\Delta t$ & \SI{0.25}{s} \\
-    end time (duration of simulation) $t_\mathrm{end}$ &  \SI{30000}{s}\\
-    \bottomrule
-\end{tabular}
-\end{center}
-
-Note that the four last parameters are not directly included in the formulation of the IDM as in eq. (\ref{eq:IDM}). Instead they are related to our particular implementation.
+Note that the four last parameters are not directly included in the formulation of the IDM as in eq. (\ref{eq:IDM}). Instead they are related to the numeric implementation.
