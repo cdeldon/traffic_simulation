@@ -67,6 +67,7 @@ class Road
         double spaceHeadway(double x) const;
         double nextRedLight(double x) const;
         std::vector<TrafficLight> getTrafficLights() const { return traffic_lights; }
+        std::vector<Obstacle> getObstacles() const {return obstacles;}
 
         int find(const Car *) const;
 

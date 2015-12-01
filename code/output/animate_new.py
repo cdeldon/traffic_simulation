@@ -1,5 +1,6 @@
 import sys
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import matplotlib.animation as animation
 import numpy as np
 
@@ -10,6 +11,7 @@ if len(sys.argv)<=1:
 else :
     data = np.loadtxt(sys.argv[1])
     dataLight = np.loadtxt(sys.argv[1] + "_lights.dat")
+    dataOb = np.loadtxt(sys.argv[1] + "_obstacles.dat")
     if len(sys.argv) ==3:
         saveAnim = (sys.argv[2] == "save")
 
@@ -23,6 +25,10 @@ throughput = data[:,-1]
 nLights = int(dataLight[0,0])
 xxLights = dataLight[:,1::2]
 onLights = dataLight[:,2::2]
+
+nObstacles = int(dataOb[0,0])
+startOb = dataOb[0,1::2]
+endOb = dataOb[0,2::2]
 
 # traveled distance of car0;
 distanceX0 = 0
@@ -40,6 +46,24 @@ scat = ax.scatter(xx[0,:], np.zeros_like(xx[0,:]))
 ax.hold(False)
 old_data = xx[0,:];
 
+def arc_patch(r1, r2, start, end, road_length,  axx=None, resolution=50, **kwargs):
+    # make sure ax is not empty
+    if axx is None:
+        axx = plt.gca()
+        
+    # calculate theta1 and theta2
+    theta1 = start/road_length*2*np.pi
+    theta2 = end/road_length*2*np.pi
+    # generate the points
+    theta = np.linspace(theta1, theta2, resolution)
+    
+    points = np.vstack((np.hstack((r2*np.cos(theta), r1*np.cos(theta[::-1]))), 
+                        np.hstack((r2*np.sin(theta), r1*np.sin(theta[::-1])))))
+    # build the polygon and add it to the axes
+    poly = mpatches.Polygon(points.T, closed=True, **kwargs)
+    axx.add_patch(poly)
+    return poly
+
 # initialization function: plot the background of each frame
 def init():
     ax.hold(False)
@@ -52,8 +76,20 @@ def animate(i):
     print('frame: ', i)
     x = road_length/(2*np.pi)*np.cos(2*np.pi*xx[i,:]/road_length)
     y = road_length/(2*np.pi)*np.sin(2*np.pi*xx[i,:]/road_length)
+         
+    # add the cars
     scat = ax.scatter(x,y)
-    ax.hold(True)
+    ax.hold(True) 
+    
+     # add the obstacles
+    if nObstacles>0:
+        #inner radius and outer radius
+        r1 = 0.95*road_length/(2*np.pi)
+        r2 = 1.05*road_length/(2*np.pi)
+        for ob in range(nObstacles):
+            arc_patch(r1, r2, startOb[ob], endOb[ob], road_length,
+                      axx=ax, fill=True, alpha=0.5, color='red')    
+
     # calculate the time in minutes, hours and second
     
     scat = ax.scatter(x[0],y[0], color='r',s=100)
@@ -86,7 +122,7 @@ def animate(i):
     global loops
     
     distanceX0 = xx[i,0] + loops*road_length;
-    if distanceX0 < oldDistance: #if the car completed a loop
+    if distanceX0 < loops*road_length + road_length/2 and oldDistance > loops*road_length + road_length/2: #if the car completed a loop
         loops += 1
         distanceX0 += road_length
         

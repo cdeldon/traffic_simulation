@@ -55,6 +55,7 @@ void Simulation::run()
     std::ofstream out(fname.c_str());
     // stream of traffic light information
     std::ofstream outLight((fname+"_lights.dat").c_str());
+    std::ofstream outOb((fname+"_obstacles.dat").c_str());
 
     unsigned int step = 0;
     unsigned int printStep = 0;
@@ -89,8 +90,17 @@ void Simulation::run()
                     outLight<<"\t" <<lights[t].pos<<"\t"<<lights[t].isRed(time);
                }
             }
+            if (settings.output_obstacles) {
+               std::vector<Obstacle> obstacles  = road.getObstacles();               
+               outOb << "\t"<<obstacles.size();
+               for(int o = 0; o<obstacles.size(); ++o)
+               {
+                    outOb<<"\t" <<obstacles[o].start<<"\t"<<obstacles[o].end;
+               }
+            }
             out << std::endl;
             outLight << std::endl;
+            outOb << std::endl;
         }
 
         drawProgress(((float) step)/(settings.end_T*1./settings.DT),

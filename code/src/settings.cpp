@@ -30,7 +30,8 @@ Settings::Settings()
       output_velocities(0),
       output_throughput(1),
       output_freq(1),
-      output_light(1)
+      output_light(1),
+      output_obstacles(1)
 {
 }
 
@@ -53,7 +54,8 @@ Settings::Settings( const unsigned int n, const double m, const double v, const 
           output_velocities(0),
           output_throughput(1),
           output_freq(1),
-          output_light(1)
+          output_light(1),
+          output_obstacles(1)
 {
 }
 
@@ -77,6 +79,7 @@ std::string Settings::toString() const
            "\nOutput velocities:\t" + to_string(output_velocities) +
            "\nOutput throughput:\t" + to_string(output_throughput) +
            "\nOutput traffic lights:\t" + to_string(output_light) +
+           "\nOutput obstacles:\t" + to_string(output_obstacles) +
            "\nWrite output every\t" + to_string(output_freq) + " [DT] = " + to_string(output_freq*DT) + " [s]" +
            "\n==========================================================\n";
 
@@ -162,6 +165,7 @@ void Settings::readSettings( const char *path )
             extractFeature(line, "VELOCITIES", output_velocities);
             extractFeature(line, "THROUGHPUT", output_throughput);
             extractFeature(line, "OUT_LI", output_light);
+            extractFeature(line, "OUT_OB", output_obstacles);
             extractFeature(line, "OUT_FREQ", output_freq);
             extractFeature(line, "GAMMA", gamma);
 
