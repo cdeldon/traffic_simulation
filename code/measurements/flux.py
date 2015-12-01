@@ -6,16 +6,16 @@ from paths import SETTINGS_PATH, OUTPUT_PATH, SIM_PATH, SIM_WD
 from common import parse_output
 
 SETTINGS_TEMPLATE = """
-ROAD_LENGTH = 1000
-VMAX      = 15
+ROAD_LENGTH = 2000
+
 MIN_DIST  = 2
 TIME_HEAD = 1.6
-AMAX      = 0.73
-DMAX      = 1.67
+AMAX      = 1.5
+DMAX      = 2.5
 CAR_SIZE  = 5
 DT        = 0.250
 END_TIME  = 3000
-GAMMA     = 3
+GAMMA     = 2
 
 
 # Output format
@@ -29,53 +29,65 @@ THROUGHPUT = 1
 exec SETTINGS_TEMPLATE
 
 def compute_flux():
-    ncars = np.arange(5, 150, 5)
-    flux = ncars*0.
-    density = ncars*0.
+    ncars = np.arange(5, 250, 5)
+    vcars = np.linspace(5, 33.36, 5)
+    vcars = np.array([30, 50, 80, 100, 120])/3.6
     
-    for i, cars in enumerate(ncars):
-        print "\n\nRunning sim for ncars = {0}".format(cars)
-        settings_file = open(SETTINGS_PATH + "/flux.txt", "w")
-        settings_file.write(SETTINGS_TEMPLATE)
-        settings_file.write("ID = flux{0}\nN_CARS= {0}".format(cars))
-        settings_file.close()
+    flux = np.zeros((len(vcars), len(ncars)))
+    density = ncars*(1000./ROAD_LENGTH)
     
-        check_call([SIM_PATH, SETTINGS_PATH+"/flux.txt"], cwd = SIM_WD)
+    for j, vel in enumerate(vcars):
+        for i, cars in enumerate(ncars):
+            print "\n\nRunning sim for ncars = {0} and maxV = {1}".format(cars, vel)
+            settings_file = open(SETTINGS_PATH + "/flux.txt", "w")
+            settings_file.write(SETTINGS_TEMPLATE)
+            settings_file.write("ID = flux{0}_{1}\nN_CARS= {0}\nVMAX= {1}".format(cars, vel))
+            settings_file.close()
         
-        # read output
-        n, tt, xx, vv, throughput = parse_output(OUTPUT_PATH+"/cars_flux{}.dat".format(cars))  
-        
-        # calculate the maximal throughput (cars per minute)
-        maxFlux = 0.
-#        for t in np.arange(len(tt)-1):
-#            maxFlux = np.max([maxFlux, throughput[t+1]-throughput[t]])
-        
-        flux[i] = throughput[-1]*1./tt[-1] 
-        density[i] = cars*(1000./ROAD_LENGTH)
+            check_call([SIM_PATH, SETTINGS_PATH+"/flux.txt"], cwd = SIM_WD)
+            
+            # read output
+            n, tt, xx, vv, throughput = parse_output(OUTPUT_PATH+"/cars_flux{0}_{1}.dat".format(cars, vel))  
+            
+            # calculate the maximal throughput (cars per minute)
+            
+            # maxFlux = 0.
+            # for t in np.arange(len(tt)-1):
+            #    maxFlux = np.max([maxFlux, throughput[t+1]-throughput[t]])
+            
+            # calculates the average throughput
+            flux[j,i] = throughput[-1]*1./tt[-1] 
         
 
     flux = flux*60*60;
     np.save("density", density)
     np.save("flux", flux)
-    return density, flux
+    np.save("maxV", vcars)
+    return density, flux, vcars
 
 
 def make_plot():
+
     density = np.load("density.npy")
     flux = np.load("flux.npy")
+    velocity = np.load("maxV.npy")
+    velocity = velocity*3.6;
     
-  
-    plt.plot(density, flux, label="car flux")
+    for i, v in enumerate(velocity):
+        plt.plot(density, flux[i,:], label=r"$v_{max}= "+str(int(velocity[i]))+"[km/h]$")
+        
     plt.xlabel(r"car density (cars/km)")
     plt.ylabel(r"flux (cars/h)")
+#    plt.title(r"Traffic Flux for different car densities and maximal velocities")
+    plt.legend(loc="best")
     
     plt.grid(True)
     plt.savefig("flux.png")
-    plt.legend(loc="best")
+    plt.savefig("flux.pdf")
     plt.show()
     
     
 if __name__ == "__main__":
-    compute_flux()
+    #compute_flux()
     make_plot()
 
