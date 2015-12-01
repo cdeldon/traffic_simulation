@@ -15,7 +15,7 @@ public:
     Road const * getRoad() const;
 
     void run();
-    void drawProgress(double, double, unsigned int l = 20);
+    void drawProgress(double, double, unsigned int l = 54);
 
 private:
     void applySettingsChange();

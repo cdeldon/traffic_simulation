@@ -59,7 +59,7 @@ void Simulation::run()
 
     unsigned int step = 0;
     unsigned int printStep = 0;
-    std::cout<<"\n\n\t\tPROGRESS:\n";
+    std::cout<<"\n\n\t\t\tPROGRESS:\n";
     for(double t = 0; t < settings.end_T; t+=settings.DT)
     {
         // if we must print the simulation

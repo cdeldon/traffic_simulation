@@ -84,7 +84,7 @@ def init():
 
 # animation function.  This is called sequentially
 def animate(i):
-    drawProgressBar(float(i)/tt[-1])
+    drawProgressBar(float(i)/len(tt))
     x = road_length/(2*np.pi)*np.cos(2*np.pi*xx[i,:]/road_length)
     y = road_length/(2*np.pi)*np.sin(2*np.pi*xx[i,:]/road_length)
          
@@ -103,7 +103,9 @@ def animate(i):
 
     # calculate the time in minutes, hours and second
     
-    scat = ax.scatter(x[0],y[0], color='r',s=100)
+    scat = ax.scatter(x[0],y[0], marker="o", color='k',s=110)
+    scat = ax.scatter(x[0],y[0], marker="o", color='w',s=70)
+    scat = ax.scatter(x[0],y[0], marker="+", color='k',s=80)
     # add the traffic lights
     if nLights>0:
         xl = 1.1*road_length/(2*np.pi)*np.cos(2*np.pi*xxLights[i,:]/road_length)
