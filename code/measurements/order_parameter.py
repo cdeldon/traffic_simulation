@@ -61,7 +61,7 @@ def make_plot():
     plt.figure(figsize=(4,3), dpi = 200)
     plt.plot(gammas, np.sqrt(variances), label="data")
     plt.xlabel(r"interaction exponent $\gamma$")
-    plt.ylabel(r"std. dev. of velocities $\sqrt{\langle v^2 \rangle}$ (m/s)")
+    plt.ylabel(r"std. dev. of velocities $\sqrt{\langle v^2 \rangle}$ [m/s]")
     plt.ylim((-1, np.sqrt(np.max(variances))+1))
     
     

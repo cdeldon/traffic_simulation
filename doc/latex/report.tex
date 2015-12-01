@@ -40,6 +40,28 @@ For performance reasons, the simulation engine has been implemented as a \textsc
 
 This back-end is controlled by a suite of tools written in \textsc{Python}, which also perform data analysis and visualization. The \textsc{Python} front-end feeds parameters to the engine, and processes its output.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=4in]{../img/free_road.png}
+    \caption{Spatio-temporal plot of the velocity field. The scale of the colorbar is in m/s. The dotted lines trace the trajectory of a selected car. The $N=50$ vehicles start uniformly distributed along the road. They quickly reach the equilibrium velocity (\SI{\sim 9}{m/s}). After about $t\approx\SI{700}{s}$ the instabilities start to become noticeable, and continue growing until $t\approx \SI{1100}{s}$. Note that the road is assumed to be periodic, hence the stop-and-go-waves, which leave the plot at the bottom, reappear at the top. Also note that the waves travel upstream, i.e. against the flow. For this simulation a time step $\Delta t=\SI{0.125}{s}$ was used.}
+    \label{fig:free_road}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=4in]{../img/order_parameter.pdf}
+    \caption{Plot of the standard deviation of the velocities of the vehicles at the end of the simulation as a function of the exponent $\gamma$. If the traffic remains stable, the velocities are equalized, and hence the variance vanishes. Increasing $\gamma$ beyond a critical value (here $\gamma_c \approx 0.298$) suppresses any instability.}
+    \label{fig:order_param}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=4in]{../img/phase_diagram.pdf}
+    \caption{Stability phase diagram with the mean vehicle density on the horizontal axis, and the interaction exponent on the vertical axis. While for the traditional value of $\gamma=2$ the traffic is unstable for a broad range of densities, a higher value of $\gamma$ can render the flow stable at high densities. For the chosen acceleration and deceleration parameters (here $a=\SI{0.6}{m/s^2}$ and $b=\SI{1.5}{m/s^2}$) the flow is stable unconditional on the vehicle density.}
+    \label{fig:phase_diagram}
+\end{figure}
+
+
 \section{Simulation Results and Discussion}
 
 \section{Summary and Outlook}

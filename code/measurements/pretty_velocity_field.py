@@ -14,7 +14,7 @@ VMAX      = 15
 MIN_DIST  = 2
 TIME_HEAD = 1.5
 AMAX      = 0.6
-DMAX      = 2
+DMAX      = 1.5
 CAR_SIZE  = 5
 DT        = 0.125
 END_TIME  = 2000
@@ -34,7 +34,7 @@ SETTINGS_TEMPLATE += "ID = free_road\n"
 
 def make_plot():
     matplotlib.rcParams.update({'font.size': 11})
-    plt.figure(figsize = (4,3), dpi = 600)
+    plt.figure(figsize = (4,3), dpi = 200)
     settings_file = open(SETTINGS_PATH + "/free_road.txt", "w")
     settings_file.write(SETTINGS_TEMPLATE)
     settings_file.close()
@@ -66,15 +66,15 @@ def make_plot():
     grid_t, grid_x = np.mgrid[0.:END_TIME:512j, 0.:ROAD_LENGTH:512j]
     grid_v = np.nan_to_num(griddata((tt_2d.flatten(), xx.flatten()), vv.flatten(), (grid_t, grid_x), rescale = True))
     
-    plt.xlabel("time")
-    plt.ylabel("position")
+    plt.xlabel("time [s]")
+    plt.ylabel("position [m]")
     plt.pcolormesh(grid_t, grid_x, grid_v)
     plt.colorbar()
     ax = plt.gca()
     ax.set_ylim([0,np.max(np.max(xx))])
     
     plt.tight_layout()
-    plt.savefig("free_road.png")
+    plt.savefig("free_road.png",dpi=600)
     #plt.savefig("free_road.pdf")
     plt.show()
     

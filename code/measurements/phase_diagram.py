@@ -4,6 +4,7 @@ from matplotlib import pyplot as plt
 
 from paths import SETTINGS_PATH, OUTPUT_PATH, SIM_PATH, SIM_WD
 from common import parse_output
+import matplotlib
 
 SETTINGS_TEMPLATE = """
 ROAD_LENGTH = 1000
@@ -68,14 +69,16 @@ def run_sim():
     np.savez("phase_diagram", densities=densities, gamma_c=gamma_c)
 
 def make_plot():
+    
     with np.load("phase_diagram.npz") as f:
         densities = f["densities"]
         gamma_c = f["gamma_c"]
-        
+
+    matplotlib.rcParams.update({'font.size': 11})
     plt.figure(figsize = (4,3), dpi = 200)
     plt.plot(densities, gamma_c, linewidth = 3)
-    plt.xlabel(r"vehicle density (km$^{-1})$")
-    plt.ylabel(r"critical exponent $\gamma_C$")
+    plt.xlabel(r"vehicle density [km$^{-1}]$")
+    plt.ylabel(r"interaction exponent $\gamma$")
     plt.ylim((1.5, 4.))
     plt.xlim((min(densities), max(densities)))
     plt.fill_between(densities, gamma_c, interpolate = True, alpha = 0.3)
