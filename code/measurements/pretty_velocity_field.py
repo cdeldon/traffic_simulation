@@ -33,8 +33,8 @@ SETTINGS_TEMPLATE += "ID = free_road\n"
 
 
 def make_plot():
-    matplotlib.rcParams.update({'font.size': 11})
-    plt.figure(figsize = (4,3), dpi = 200)
+    matplotlib.rcParams.update({'font.size': 10})
+    plt.figure(figsize = (5,3), dpi = 200)
     settings_file = open(SETTINGS_PATH + "/free_road.txt", "w")
     settings_file.write(SETTINGS_TEMPLATE)
     settings_file.close()
@@ -69,7 +69,8 @@ def make_plot():
     plt.xlabel("time [s]")
     plt.ylabel("position [m]")
     plt.pcolormesh(grid_t, grid_x, grid_v)
-    plt.colorbar()
+    cbar = plt.colorbar()
+    cbar.ax.set_ylabel('velocity [m/s]', rotation=90)
     ax = plt.gca()
     ax.set_ylim([0,np.max(np.max(xx))])
     

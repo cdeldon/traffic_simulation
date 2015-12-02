@@ -15,7 +15,8 @@ This equation contains two parts, the \emph{free road term}, and the \emph{inter
 \end{equation}
 For any $\delta>0$ this will result a relaxation of the velocity $v_\alpha$ to the speed limit $v_0$. The value of the exponent $\delta$ is typically chosen in between 1 (exponential relaxation) and 6 (the limit $\delta\rightarrow \infty$ corresponds to a constant acceleration). Here $a$ denotes the maximum acceleration. Throughout literature the most commonly used value for the exponent is $\delta=4$. This is the value that has also been adopted in this work.
 
-The \emph{interaction term} is designed to limit the cars' velocity on a densely populated road. It acts as a `repulsive potential', which tries to enforce the \emph{desired gap} $s^*$ as the distance between two cars. The desired gap is calculated as
+\subsection{The interaction term}
+The \emph{interaction term} merits further attention. It is designed to limit the cars' velocity on a densely populated road. It acts as a `repulsive potential', which tries to enforce the \emph{desired gap} $s^*$ as the distance between two cars. The desired gap is calculated as
 \begin{equation}
 s^*(v_\alpha, \Delta v_\alpha) = s_0 + \max\left(v_\alpha T + \frac{v_\alpha \Delta v_\alpha}{2\sqrt{ab}},\;0\right).
 \label{eq:desired_gap}
@@ -26,25 +27,22 @@ It contains
     \item a safety distance $v_\alpha T$ based on the drivers' desired time headway\footnote{The time headway $T$ is the time between the moment the first vehicle's bumper passes a stationary point, and the moment the next vehicle passes it.} $T$,
     \item a breaking term $\frac{v_\alpha \Delta v_\alpha}{2\sqrt{ab}}$, with the `comfortable' deceleration $b$.
 \end{itemize}
-The breaking term inhibits large closing speeds between vehicles. It has been designed in such a way that for $\gamma = 2$, the deceleration does not exceed $b$ except in emergency situations (for more information on the asymtpotic behaviour of this term, see \cite{treiber2000}). In the present work, particular focus has been paid precisely to  $\gamma \ne 2$. We will try to answer the question to what extend this parameter affects the stability of the flow.
+The breaking term inhibits large closing speeds between vehicles. Indeed, for the traditional value $\gamma=2$, and large closing speeds, the interaction term essentially reduces to 
+\begin{equation}
+    -a \left(\frac{v \Delta v}{2 \sqrt{a b}s}\right)^2 = -\frac{b_k^2}{b},
+\end{equation}
+where $b_k$ denotes the \emph{kinematic deceleration}, i.e. the deceleration necessary to avoid a collision. Since drivers thus underestimate situations where $b_k\ll b$, while they break harder than necessary for $b_k\gg b$, it is easy to see that the resulting acceleration will tend towards $\dot v = -b$. \cite{treiber2000}
 
-Indeed, while for $\gamma=2$, the interaction term in eq. (\ref{eq:IDM}) represents a Coulomb like force field, for $\gamma>2$, the repulsive walls of the potential will become steeper. In the following we will demonstrate that this increase of $\gamma$, while leaving the other parameters fixed, will suppress any instabilities in the traffic flow.
+In the present work, particular focus has been paid precisely to  $\gamma \ne 2$. We will try to answer the question to what extend this parameter affects the stability of the flow. In the following we will demonstrate that this increase of $\gamma$, while leaving the other parameters fixed, will suppress any instabilities in the traffic flow.
 
 \subsection{Boundary conditions}
-As for the boundary conditions, there are two obvious choices: either add and remove vehicles during the simulation run (as is done e.g. in \cite{treiber1999}, or make the road periodic, i.e. ring like \cite{treiber2015}. It is this second variant that has been implemented for this project. It makes the model significantly simpler, as apart from a transient time at the beginning of the simulation, no border effects appear. On the other hand, it provides limited ability to change the amount of cars on the road at run-time. In \cite{treiber1999, treiber2006} for instance, the instability is triggered by a short increase of the influx.
+As for the boundary conditions of the road, there are two obvious choices: either add and remove vehicles during the simulation run (as is done e.g. in \cite{treiber1999}), or make the road periodic, i.e. ring-like \cite{treiber2015}. It is this second variant that has been implemented for this project. It makes the implementation significantly simpler, as no care has to be taken to spawn the vehicles at the right position with an appropriate speed. On the other hand, it provides limited ability to change the amount of cars on the road at run-time.
 
-On behalf of periodic boundary conditions, it is worth noting that some experimental data exists on precisely such a situation, namely cars driving in a queue on a circular track  \cite{nakayama2009,tadaki2013}. Here a spontaneously emerging instability was observed; we will see that our model can qualitatively reproduce these observations.
+On the subject of periodic boundary conditions, it is worth noting that some experimental data exists on precisely such a situation, namely cars driving on a circular track \cite{nakayama2009,tadaki2013}. Here a spontaneously emerging instability has been observed; we will see that our model can qualitatively reproduce these observations.
 
 
 \subsection{Limits of the model}
-The differential equations (\ref{eq:IDM}) are integrated via the following Runge-Kutta scheme:
-\begin{align*}
-v_\alpha(t+\Delta t) &= \dot v_\alpha(t)\Delta t+v_\alpha(t) \\
-x_\alpha(t+\Delta t) &= \frac{1}{2}\dot v_\alpha(t) (\Delta t)^2 + v_\alpha(t)\Delta t + x_\alpha(t)
-\end{align*}
-For the case where $\dot v_\alpha$ does only depend on $x_\alpha$, but not on $v_\alpha$, this scheme is known as the Verlet method, and converges with quadratic order. In the present case, these requirements are not met, so second order convergence might not actually be achieved. No tests on this have been carried out, as even first order methods have been proven to be accurate enough \cite{treiber2015}.
-
-Note that the IDM does not model the finite reaction time of an actual human driver\footnote{The finite time step $\Delta t$ is \emph{not} to be mistaken for a reaction time. Refer to \cite{treiber2006} for an extensive explanation of the differences.}. Indeed, when a realistic reaction time is included, IDM-like simulations show very poor stability when compared to empiric human driving . This led to the conclusion that in reality drivers do look ahead further than only the nearest neighbour \cite{treiber2006}.
+The IDM does not model the finite reaction time of an actual human driver\footnote{The finite time step $\Delta t$ is \emph{not} to be mistaken for a reaction time. Refer to \cite{treiber2006} for an extensive explanation of the differences.}. Indeed, when a realistic reaction time was included, IDM-like simulations show very poor stability when compared to empiric human driving. This suggests that in reality drivers do look ahead further than only the nearest neighbour \cite{treiber2006}.
 
 The road on which the vehicles travel is assumed to be single lane (no overtaking) and straight (constant speed limit). All drivers and vehicles are assumed to be identical.
 
@@ -66,7 +64,7 @@ In table \ref{tab:param} the reader may find an overview of all the parameters i
             car size $l_\alpha$ & \SI{5}{m} \\
             number of cars $N$ & 50\\
             length of road $L$ & \SI{1}{km} \\
-            time step $\Delta t$ & \SI{0.25}{s} \\
+            time step $\Delta t$ & \SI{0.250}{s} \\
             end time (duration of simulation) $t_\mathrm{end}$ &  \SI{30000}{s}\\
             \bottomrule
         \end{tabular}
