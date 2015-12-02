@@ -1,14 +1,6 @@
 # TODO LIST
-- [x] Implement flux sweep
-- [x] and run it
-- [x] sweep density in plots of order parameter
-- [ ] find nice settigs for traffic light and/or obstacles
-- [ ] sweep traffic light switching frequency, plot throughput
-
-
-
-
-
+- [ ] sweep order parameter with different road length (edit `order_parameter_sweep.py`)
+- [ ] plot order parameter vs asymmetry (e.g. difference or ratio) between acceleration and deceleration (set a=0.6, b=[0.5, 2])
 
 
 # MATLAB Fall 2015 – Research Plan
