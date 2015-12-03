@@ -14,7 +14,7 @@ MIN_DIST  = 2
 TIME_HEAD = 1.5
 CAR_SIZE  = 5
 DT        = 0.250
-END_TIME  = 3000
+END_TIME  = 4000
 
 
 # Output format
@@ -54,21 +54,28 @@ def compute_variances(settings = SETTINGS_TEMPLATE, gammas = GAMMA):
 
 
 def make_plot():
+    plt.figure(figsize=(3,2.25))
     variances = np.load("variances_delta_acceleration.npy")
     DMAX = np.load("deceleration_delta_acceleration.npy")
 
     matplotlib.rcParams.update({'font.size': 11})
+    matplotlib.rcParams['mathtext.fontset'] = 'custom'
+    matplotlib.rcParams['mathtext.rm'] = 'Bitstream Vera Sans'
+    matplotlib.rcParams['mathtext.it'] = 'Bitstream Vera Sans:italic'
+    matplotlib.rcParams['mathtext.bf'] = 'Bitstream Vera Sans:bold'
+
+    
     plt.figure(figsize=(4,3), dpi = 200)
     plt.plot(DMAX-AMAX, np.sqrt(variances))
-    plt.xlabel(r"difference between $a_{max}$ and $b_{max}$ [m/s$^2$]")
-    plt.ylabel(r"std. dev. of velocities $\sqrt{\langle v^2 \rangle}$ [m/s]")
+    plt.xlabel(r"de- & acceleration difference $b-a$ [m/s$^2$]")
+    plt.ylabel("std. dev. of velocities\n"+r"$\sqrt{\langle v^2 \rangle}$ [m/s]")
     plt.ylim((-1, np.sqrt(np.max(variances))+1))
     
     
   
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig("order_parameter_delta_acceleration.png")
+    plt.savefig("order_parameter_delta_acceleration.png", dpi = 300)
     plt.savefig("order_parameter_delta_acceleration.pdf")
     plt.show()
     

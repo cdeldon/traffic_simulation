@@ -28,15 +28,14 @@ THROUGHPUT = 1
 exec SETTINGS_TEMPLATE
 
 N_gammas = 51
-Fixed_density = 0.05 #cars 50 cars per km
+Fixed_density = 0.05 # 50 cars per km
 
-road_lengths = np.array([1000, 10000])
+road_lengths = np.array([1000, 2000, 5000, 10000])
 N_road_length = len(road_lengths)
 
 N_cars = (Fixed_density * road_lengths).astype(int)
 
 def run_sim():
-
     sims = np.zeros((N_road_length,2, N_gammas))   
     for i,l in enumerate(road_lengths):
         settings = SETTINGS_TEMPLATE + "N_CARS = {0}\nROAD_LENGTH = {1}\n".format(N_cars[i], l)
@@ -47,23 +46,25 @@ def run_sim():
 
 def make_plot():
     sims = np.load("sims.npy")
-    matplotlib.rcParams.update({'font.size': 16})
+    plt.figure(figsize=(4,3))
+    matplotlib.rcParams.update({'font.size': 11})
     for i,l in enumerate(road_lengths):
         gammas, variances = sims[i]
         plt.plot(gammas, np.sqrt(variances), label="{} km".format(int(l/1000)))
         
     plt.xlabel(r"gap potential exponent $\gamma$")
     plt.ylabel(r"deviation of velocities $\sqrt{\langle v^2 \rangle}$ (m/s)")
-    #plt.ylim((-1, np.sqrt(np.max(variances))+1))
+    plt.ylim((-1, np.sqrt(np.max(variances))+1))
     
     plt.grid(True)
-    plt.legend(loc="best")
+    plt.legend(loc="lower left", prop={'size':11})
+    plt.tight_layout()
     plt.savefig("order_parameter_sweep.png")
     plt.savefig("order_parameter_sweep.pdf")
     plt.show()
     
     
 if __name__ == "__main__":
-    run_sim()
+    #run_sim()
     make_plot()
 
