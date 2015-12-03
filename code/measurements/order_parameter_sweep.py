@@ -12,7 +12,7 @@ VMAX      = 15
 MIN_DIST  = 2
 TIME_HEAD = 1.5
 AMAX      = 0.6
-DMAX      = 2
+DMAX      = 1.5
 CAR_SIZE  = 5
 DT        = 0.250
 END_TIME  = 30000
@@ -65,6 +65,6 @@ def make_plot():
     
     
 if __name__ == "__main__":
-    #run_sim()
+    run_sim()
     make_plot()
 

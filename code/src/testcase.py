@@ -15,7 +15,7 @@ nGamma = len(gammas)
 
 AMAX = 0.6
 DMAX = 1.5
-VMAX = 50.0
+VMAX = 30
 
 MIN_DIST  = 2.0
 TIME_HEAD = 1.5
@@ -25,11 +25,8 @@ DELTA = 4.0
 
 # dynamics
 
-v0 = 30.0
-x0 = -100.0
-
 dt = 0.01
-T = 20.0
+T = 200.0
 nSteps = int(T/dt)
 
 x = np.zeros((nGamma, nSteps+1))
@@ -60,7 +57,7 @@ def getAcceleration(x,v, gamma):
 #perform the simulation once per parameter gamma
 for i, gamma in enumerate(gammas):
     v0 = 15.0
-    x0 = -100.0
+    x0 = -1000.0
     t = 0.0
     
     x[i,0] = x0;
@@ -82,20 +79,20 @@ for i,gamma in enumerate(gammas):
     plt.plot(x[i,:], v[i,:], label=r"$\gamma$ = {}".format(gamma))
     
 plt.legend(loc="best")
-plt.xlabel("Position [m]")
+plt.xlabel("Position x [m]")
 plt.ylabel("Velocity [m/s]")
 
 plt.subplot(122)
 for i,gamma in enumerate(gammas):
     plt.plot(x[i,:-1], -a[i,:])
 
-plt.hlines(DMAX, -100,0, color='k',linestyles='dashed', label="comfortable\n"+r"deceleration $b$")
+plt.hlines(DMAX, x0,0, color='k',linestyles='dashed', label="comfortable\n"+r"deceleration $b$")
 
-plt.legend(loc="best")
-plt.xlabel("Position [m]")
+plt.legend(loc="lower center")
+plt.xlabel("Position x [m]")
 plt.ylabel(r"Deceleration [m/s$^2$]")
 #plt.ylim((1e-1, 1e1))
-plt.xlim((-100,0))
+plt.xlim((x0,0))
 
 plt.tight_layout()
 plt.savefig("../measurements/vel_profile.pdf")

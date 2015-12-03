@@ -12,7 +12,7 @@ VMAX      = 15
 MIN_DIST  = 2
 TIME_HEAD = 1.5
 AMAX      = 0.6
-DMAX      = 2
+DMAX      = 1.5
 CAR_SIZE  = 5
 DT        = 0.250
 END_TIME  = 30000
@@ -79,12 +79,12 @@ def make_plot():
     plt.plot(densities, gamma_c, linewidth = 3)
     plt.xlabel(r"vehicle density [km$^{-1}]$")
     plt.ylabel(r"interaction exponent $\gamma$")
-    plt.ylim((1.5, 4.))
+    plt.ylim((1.5, 3.5))
     plt.xlim((min(densities), max(densities)))
     plt.fill_between(densities, gamma_c, interpolate = True, alpha = 0.3)
     plt.grid(True)
     plt.text(70, 2.2, "Unstable")
-    plt.text(22, 3.7, "Homogeneous")
+    plt.text(22, 3.2, "Homogeneous")
     plt.tight_layout()
     plt.savefig("phase_diagram.png")
     plt.savefig("phase_diagram.pdf")

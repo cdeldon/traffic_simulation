@@ -16,6 +16,7 @@ This equation contains two parts, the \emph{free road term}, and the \emph{inter
 For any $\delta>0$ this will result a relaxation of the velocity $v_\alpha$ to the speed limit $v_0$. The value of the exponent $\delta$ is typically chosen in between 1 (exponential relaxation) and 6 (the limit $\delta\rightarrow \infty$ corresponds to a constant acceleration). Here $a$ denotes the maximum acceleration. Throughout literature the most commonly used value for the exponent is $\delta=4$. This is the value that has also been adopted in this work.
 
 \subsection{The interaction term}
+\label{sec:interaction}
 The \emph{interaction term} merits further attention. It is designed to limit the cars' velocity on a densely populated road. It acts as a `repulsive potential', which tries to enforce the \emph{desired gap} $s^*$ as the distance between two cars. The desired gap is calculated as
 \begin{equation}
 s^*(v_\alpha, \Delta v_\alpha) = s_0 + \max\left(v_\alpha T + \frac{v_\alpha \Delta v_\alpha}{2\sqrt{ab}},\;0\right).
@@ -30,10 +31,11 @@ It contains
 The breaking term inhibits large closing speeds between vehicles. Indeed, for the traditional value $\gamma=2$, and large closing speeds, the interaction term essentially reduces to 
 \begin{equation}
     -a \left(\frac{v \Delta v}{2 \sqrt{a b}s}\right)^2 = -\frac{b_k^2}{b},
+    \label{eq:decel}
 \end{equation}
 where $b_k$ denotes the \emph{kinematic deceleration}, i.e. the deceleration necessary to avoid a collision. Since drivers thus underestimate situations where $b_k\ll b$, while they break harder than necessary for $b_k\gg b$, it is easy to see that the resulting acceleration will tend towards $\dot v = -b$. \cite{treiber2000}
 
-In the present work, particular focus has been paid precisely to  $\gamma \ne 2$. We will try to answer the question to what extend this parameter affects the stability of the flow. In the following we will demonstrate that this increase of $\gamma$, while leaving the other parameters fixed, will suppress any instabilities in the traffic flow.
+In the present work, particular focus has been paid precisely to  $\gamma \ne 2$. We will try to answer the question as to how and why this parameter affects the stability of the flow. In the following we will demonstrate that this increase of $\gamma$, while leaving the other parameters fixed, will suppress any instabilities in the traffic flow.
 
 \subsection{Boundary conditions}
 As for the boundary conditions of the road, there are two obvious choices: either add and remove vehicles during the simulation run (as is done e.g. in \cite{treiber1999}), or make the road periodic, i.e. ring-like \cite{treiber2015}. It is this second variant that has been implemented for this project. It makes the implementation significantly simpler, as no care has to be taken to spawn the vehicles at the right position with an appropriate speed. On the other hand, it provides limited ability to change the amount of cars on the road at run-time.
@@ -56,7 +58,7 @@ In table \ref{tab:param} the reader may find an overview of all the parameters i
             \midrule
             global speed limit $v_0$ & \SI{15}{m/s} \\
             maximum acceleration $a$ & \SI{0.6}{m/s^2} \\
-            maximum comfortable deceleration $b$ & \SI{1.1}{m/s^2} \\
+            maximum comfortable deceleration $b$ & \SI{1.5}{m/s^2} \\
             minimum time headway $T$ & \SI{1.5}{s} \\
             minimum jam distance $s_0$ & \SI{2}{m} \\
             free road acceleration exponent $\delta$ & 4 \\
