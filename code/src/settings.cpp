@@ -27,11 +27,11 @@ Settings::Settings()
       end_T(40*60),
       ID("simulation"),
       output_positions(1),
-      output_velocities(0),
+      output_velocities(1),
       output_throughput(1),
       output_freq(1),
-      output_light(1),
-      output_obstacles(1)
+      output_light(0),
+      output_obstacles(0)
 {
 }
 
@@ -51,11 +51,11 @@ Settings::Settings( const unsigned int n, const double m, const double v, const 
           end_T(T),
           ID("simulation"),
           output_positions(1),
-          output_velocities(0),
+          output_velocities(1),
           output_throughput(1),
           output_freq(1),
-          output_light(1),
-          output_obstacles(1)
+          output_light(0),
+          output_obstacles(0)
 {
 }
 
