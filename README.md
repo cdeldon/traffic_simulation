@@ -1,9 +1,6 @@
-# TODO LIST
-- [ ] sweep order parameter with different road length (edit `order_parameter_sweep.py`)
-- [ ] plot order parameter vs asymmetry (e.g. difference or ratio) between acceleration and deceleration (set a=0.6, b=[0.5, 2])
+# [Link to the final report PDF](doc/latex/report.pdf)
 
-
-# MATLAB Fall 2015 – Research Plan
+# MATLAB Fall 2015 – Research Plan (Obsolete)
 
 > * Group Name: **Road Blockers**
 > * Group participants names: Carlo Del Don, Pol Welter
