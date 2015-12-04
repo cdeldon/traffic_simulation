@@ -87,6 +87,7 @@ for i,gamma in enumerate(gammas):
     plt.plot(x[i,:-1], -a[i,:])
 
 plt.hlines(DMAX, x0,0, color='k',linestyles='dashed', label="comfortable\n"+r"deceleration $b$")
+plt.hlines(0, x0,0, color='k',linestyles='dotted')
 
 plt.legend(loc="lower center")
 plt.xlabel("Position x [m]")
