@@ -1,9 +1,9 @@
 \section{Implementation}
-For performance reasons, the simulation engine has been implemented as a \textsc{C++} program. It reads the simulation parameters from a text file, runs the simulation, and saves the desired values (e.g. vehicle position \& velocity as a function of time) in another file.
+For performance reasons, the simulation engine has been implemented as a \textsc{C++} program. The executable reads the simulation parameters from a text file, runs the simulation, and dumps the desired values (e.g.\ vehicle position \& velocity as a function of time) in another file.
 
 This back-end is controlled by a suite of tools written in \textsc{Python}, which also perform data analysis and visualization. The \textsc{Python} front-end feeds parameters to the engine, and processes its output.
 
-The differential equations (\ref{eq:IDM}) are integrated via the following Runge-Kutta scheme:
+The differential equations~\eqref{eq:IDM} are integrated via the following Runge-Kutta scheme:
 \begin{align*}
 v_\alpha(t+\Delta t) &= \dot v_\alpha(t)\Delta t+v_\alpha(t) \\
 x_\alpha(t+\Delta t) &= \frac{1}{2}\dot v_\alpha(t) (\Delta t)^2 + v_\alpha(t)\Delta t + x_\alpha(t)
