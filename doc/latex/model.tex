@@ -3,16 +3,12 @@
 We have implemented the \emph{Intelligent Driver Model} (IDM). The IDM, first introduced by Treiber et al.\ \cite{treiber1999, treiber2000}, is deterministic and continuous in both, space and time.
 
 This model describes the evolution of the simulated system as a set of differential equations. The behaviour of each vehicle (its acceleration $\dot{v}_\alpha$) is given as a function of its current velocity $v_\alpha$, the gap to the leading vehicle $s_\alpha$, etc.
-The position of the vehicles are integrated over time solving the following simple \emph{ODE}
+The acceleration of vehicle $\alpha$ reads 
 \begin{equation}
-\dot{x}_\alpha = v_\alpha
-\end{equation}
-while the acceleration $\dot v_\alpha$ of vehicle $\alpha$ reads 
-\begin{equation}
-\dot v_\alpha = a\left(\underbrace{1-\left(\frac{v_\alpha}{v_0}\right)^\delta}_{\text{free road term}} - \underbrace{\left(\frac{s^*(v_\alpha, \Delta v_\alpha)}{s_\alpha}\right)^\gamma}_{\text{inteaction term}}\right).
+\ddot x_\alpha = \dot v_\alpha = a\left(\underbrace{1-\left(\frac{v_\alpha}{v_0}\right)^\delta}_{\text{free road term}} - \underbrace{\left(\frac{s^*(v_\alpha, \Delta v_\alpha)}{s_\alpha}\right)^\gamma}_{\text{inteaction term}}\right).
 \label{eq:IDM}
 \end{equation}
-This equation contains two parts, the \emph{free road term}, and the \emph{interaction term}. For a low vehicle density (i.e. $s_\alpha \rightarrow 0$) \FIXME{Shouldn't it be $s_\alpha \gg 1$} the above equation can be simplified to
+This equation contains two parts, the \emph{free road term}, and the \emph{interaction term}. For a low vehicle density (i.e. $s_\alpha \rightarrow \infty$) the above equation can be simplified to
 \begin{equation}
 \dot v_\alpha = a\left(1-\left(\frac{v_\alpha}{v_0}\right)^\delta\right).
 \end{equation}
@@ -20,7 +16,7 @@ For any $\delta>0$ this will result a relaxation of the velocity $v_\alpha$ to t
 
 \subsection{The interaction term}
 \label{sec:interaction}
-The \emph{interaction term} merits further attention. It is designed to limit the cars' velocity on a densely populated road acting as a `repulsive potential', which tries to enforce the \emph{desired gap} $s^*$ as the distance between two cars. The desired gap is calculated as
+The \emph{interaction term} merits further attention. It is designed to limit the cars' velocity on a densely populated road by acting as a `repulsive potential', which tries to enforce the \emph{desired gap} $s^*$ as the distance between two cars. The desired gap is calculated as
 \begin{equation}
 s^*(v_\alpha, \Delta v_\alpha) = s_0 + \max\left(v_\alpha T + \frac{v_\alpha \Delta v_\alpha}{2\sqrt{ab}},\;0\right).
 \label{eq:desired_gap}
@@ -38,7 +34,7 @@ The breaking term inhibits large closing speeds between vehicles. To the best of
 \end{equation}
 where $b_k$ denotes the \emph{kinematic deceleration}, i.e.\ the deceleration necessary to avoid a collision. Since drivers thus underestimate situations where $b_k\ll b$, while they break harder than necessary for $b_k\gg b$, it is easy to see that the resulting acceleration will tend towards $\dot v = -b$. \cite{treiber2000}
 
-In the present work, particular focus has been paid precisely to  $\gamma \neq 2$. We will try to answer the question as to how and why this parameter affects the stability of the traffic flow. In the following we will see that traffic flows simulated with the same settings but the value of $\gamma$, will show a large difference in the smoothness of the flow: an increase of $\gamma$ allows a much smoother traffic flow and any instability (stop-and-go waves) is removed.
+In the present work, particular focus has been paid precisely to  $\gamma \neq 2$. We will try to answer the question as to how and why this parameter affects the stability of the traffic flow. In the following we will see that increasing $\gamma$, while leaving the other parameters fixed, suppresses any instabilities in the traffic flow.
 
 \subsection{Boundary conditions}
 As for the boundary conditions of the road, there are two obvious choices: either add and remove vehicles during the simulation (as is done e.g.\ in \cite{treiber1999}), or make the road periodic, i.e.\ ring-like \cite{treiber2015}. The results we present in this work are based on simulations of a ring-like periodic road.
@@ -49,7 +45,7 @@ On the subject of periodic boundary conditions, it is worth noting that some exp
 
 
 \subsection{Limits of the model}
-The IDM does not model the finite reaction time of an actual human driver\footnote{The finite time step $\Delta t$ is \emph{not} to be mistaken for a reaction time. Refer to \cite{treiber2006} for an extensive explanation of the differences.}. Indeed, when a realistic reaction time was included, IDM-like simulations show very poor stability when compared to empiric human driving. This suggests that in reality drivers do look ahead further than only the car in front of them \cite{treiber2006}.
+The IDM does not model the finite reaction time of an actual human driver\footnote{The finite time step $\Delta t$ is \emph{not} to be mistaken for a reaction time. Refer to \cite{treiber2006} for an extensive explanation of the differences.}. Indeed, when a realistic reaction time was included, IDM-like simulations show very poor stability when compared to empiric human driving. This suggests that in reality drivers do look ahead further than only the first car in front of them \cite{treiber2006}.
 
 The road on which the vehicles travel is assumed to be single lane (no overtaking) and straight (constant speed limit). All drivers and vehicles are assumed to be identical.
 
