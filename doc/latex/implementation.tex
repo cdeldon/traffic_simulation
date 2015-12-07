@@ -3,9 +3,11 @@ For performance reasons, the simulation engine has been implemented as a \textsc
 
 This back-end is controlled by a suite of tools written in \textsc{Python}, which also perform data analysis and visualization. The \textsc{Python} front-end feeds parameters to the engine, and processes its output.
 
-The differential equations~\eqref{eq:IDM} are integrated via the following Runge-Kutta scheme:
+\noindent The differential equations~\eqref{eq:IDM} are integrated via the following Runge-Kutta scheme:
 \begin{align*}
 v_\alpha(t+\Delta t) &= \dot v_\alpha(t)\Delta t+v_\alpha(t) \\
 x_\alpha(t+\Delta t) &= \frac{1}{2}\dot v_\alpha(t) (\Delta t)^2 + v_\alpha(t)\Delta t + x_\alpha(t)
 \end{align*}
 For the case where $\dot v_\alpha$ does only depend on $x_\alpha$, but not on $v_\alpha$, this scheme is known as the \emph{Verlet method}, and converges with quadratic order. In the present case, these requirements are not met, so second order convergence might not actually be achieved. No tests on this have been carried out, as even first order methods have been proven to be accurate enough \cite{treiber2015}.
+
+Note that numeric integration discretizes time: while the IDM inherently is continuous in time, our implementation is not. To avoid numerical issues due to the finite time step, we clamp to zero any velocities that would otherwise become negative.
