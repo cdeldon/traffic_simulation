@@ -97,6 +97,7 @@ plt.xlim((x0,0))
 
 plt.tight_layout()
 plt.savefig("../measurements/vel_profile.pdf")
+plt.savefig("../measurements/vel_profile.png")
 plt.show()
 
 
