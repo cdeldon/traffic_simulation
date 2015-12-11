@@ -1,4 +1,4 @@
-\section{Simulation Results and Discussion}
+\section{Simulation Results}
 \subsection{Stop-and-go waves on a free road}
 Our implementation successfully reproduces an unstable traffic and apparition of a jam on unobstructed roads (see Figure~\ref{fig:free_road} for a representation of the flow). The vehicles start from stand-still, and reach equilibrium velocity within less than a minute. At about $t=\SI{700}{s}$ two seemingly independent perturbations start to grow in intensity, and develop into full blown stop-and-go waves at $t\approx \SI{1100}☺{s}$.
 
@@ -29,7 +29,7 @@ Indeed, when choosing $b$ close to $a$, no instabilities can be observed. In Fig
 For this particular run the acceleration was fixed to $a=\SI{0.6}{m/s^2}$, while $b$ was swept over the according range. The simulation was run for a long time ($t_\mathrm{end} = \SI{500}{min}$). To measure instabilities, the standard deviation of the final velocity distribution was computed. For all further simulations, we use the values for $a$ and $b$ as listed in Table~\ref{tab:param}.
 
 \subsection{Effects of the interaction exponent $\gamma$}
-We find that by increasing the exponent $\gamma$, the instabilities vanish as well. All the vehicles' velocity and spacing remain constant equal to their equilibrium value. The transition from homogeneous traffic to flow prone to instability as a function of $\gamma$ is very sharp. Figure~\ref{fig:order_param} shows this relation. Again the standard deviation of the final velocity distribution was computed as measure for inhomogeneity. As the standard deviation of the velocities vanishes in the homogeneous (disordered) phase, and quickly rises in the inhomogeneous (ordered) phase, it qualifies as an order parameter.
+We find that by increasing the exponent $\gamma$, the instabilities vanish as well. All the vehicles' velocity and spacing remain constant and equal to their equilibrium value. The transition from homogeneous traffic to flow prone to instability as a function of $\gamma$ is very sharp. Figure~\ref{fig:order_param} shows this relation. Again the standard deviation of the final velocity distribution was computed as measure for inhomogeneity. As the standard deviation of the velocities vanishes in the homogeneous (disordered) phase, and quickly rises in the inhomogeneous (ordered) phase, it qualifies as an order parameter.
 
 The critical value $\gamma_c$ at which the transition occurs is well defined and mostly independent on the length of the road. Only for $L=\SI{1}{km}$ (blue curve) we see significant finite-size effects.
 \begin{figure}

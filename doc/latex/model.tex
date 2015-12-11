@@ -1,6 +1,6 @@
 \section{Description of the Model}
 \label{sec:model}
-We have implemented the \emph{Intelligent Driver Model} (IDM). The IDM, first introduced by Treiber et al.\ \cite{treiber1999, treiber2000}, is deterministic and continuous in both, space and time.
+We have implemented the \emph{Intelligent Driver Model} (IDM). The IDM, first introduced by Treiber et al.\ \cite{treiber1999, treiber2000}, is deterministic and continuous in both space and time.
 
 This model describes the evolution of the simulated system as a set of differential equations. The behaviour of each vehicle (its acceleration $\dot{v}_\alpha$) is given as a function of its current velocity $v_\alpha$, the gap to the leading vehicle $s_\alpha$, etc.
 The acceleration of vehicle $\alpha$ reads 
@@ -39,9 +39,9 @@ In the present work, particular focus has been paid precisely to  $\gamma \neq 2
 \subsection{Boundary conditions}
 As for the boundary conditions of the road, there are two obvious choices: either add and remove vehicles during the simulation (as is done e.g.\ in \cite{treiber1999}), or make the road periodic, i.e.\ ring-like \cite{treiber2015}. The results we present in this work are based on simulations of a ring-like periodic road.
 
-The choice of the periodic boundary conditions makes the implementation of the IDM significantly simpler, as no care has to be taken to spawn the vehicles at the right position with an appropriate speed. On the other hand, it provides limited ability to change the amount of cars on the road at run-time.
+The choice of the periodic boundary conditions makes the implementation of the IDM significantly simpler, as no care has to be taken to spawn the vehicles at the right position with an appropriate speed. On the other hand, it provides limited ability to change the number of cars on the road at run-time.
 
-On the subject of periodic boundary conditions, it is worth noting that some experimental data exists on precisely such settings, namely cars driving on a circular track \cite{nakayama2009,tadaki2013}. Here a spontaneously emerging instability has been observed; we will see that our model can qualitatively reproduce these observations.
+On the subject of periodic boundary conditions, it is worth noting that some experimental data exists on precisely such a setting, namely cars driving on a circular track \cite{nakayama2009,tadaki2013}. Here a spontaneously emerging instability has been observed; we will see that our model can qualitatively reproduce these observations.
 
 
 \subsection{Limits of the model}
